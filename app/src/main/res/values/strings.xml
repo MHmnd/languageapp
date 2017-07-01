@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Tongan</string>
+    <string name="button_sign_in">Sign In</string>
+    <string name="i_don_t_have_an_account">I don\'t have an account</string>
+    <string name="create_account">Sign Up</string>
+    <string name="progress_dialog_loading">Loading</string>
+    <string name="progress_dialog_authenticating_with_firebase">Authenticating with Firebase</string>
+    <string name="google_error_auth_with_google">google Auth error</string>
+    <string name="google_error_network_error">google network error</string>
+    <string name="google_error_recoverable_oauth_error">google Oauth error</string>
+    <string name="oauth2_format">oauth2:%s</string>
+</resources>

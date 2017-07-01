@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "588958211143",
+    "firebase_url": "https://learning-ce18a.firebaseio.com",
+    "project_id": "learning-ce18a",
+    "storage_bucket": "learning-ce18a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588958211143:android:105c01928d9bd11b",
+        "android_client_info": {
+          "package_name": "com.slowthecurry.mycahh.learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588958211143-kdinfcg3cisg3ispat7btisi2mm6lklj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.slowthecurry.mycahh.learning",
+            "certificate_hash": "2875c38543e4e8e99d51d5e98d7f739da9216d92"
+          }
+        },
+        {
+          "client_id": "588958211143-q1arvbm873fni3b2fn0il5j6esj7tcja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDybTOlfHWHcEv49iiioKz3busbzTuBxus"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588958211143-q1arvbm873fni3b2fn0il5j6esj7tcja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
