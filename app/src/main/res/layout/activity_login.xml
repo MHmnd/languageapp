@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/lib/com.slowthecurry.mycahh.learning"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="com.slowthecurry.mycahh.learning.LogIn">
+    tools:context="com.slowthecurry.mycahh.learning.LoginActivity">
 
     <LinearLayout
         android:id="@+id/linear_layout_login_activity"
@@ -42,7 +42,7 @@
                 android:nextFocusDown="@+id/edit_text_password"
                 android:padding="@dimen/edit_text_padding"
                 android:textColor="@color/black"
-                android:textColorHint="@color/dark_grey"
+                android:textColorHint="@color/darkgrey"
                 android:textSize="@dimen/login_buttons_text_size" />
         </android.support.design.widget.TextInputLayout>
 
@@ -58,12 +58,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:hint="@string/hint_enter_password"
+                android:hint="@string/password_hint"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:padding="@dimen/edit_text_padding"
                 android:textColor="@color/black"
-                android:textColorHint="@color/dark_grey"
+                android:textColorHint="@color/darkgrey"
                 android:textSize="@dimen/login_buttons_text_size" />
         </android.support.design.widget.TextInputLayout>
 

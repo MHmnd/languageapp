@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Tongan</string>
+
+    <!-- Login / Create account -->
     <string name="button_sign_in">Sign In</string>
     <string name="i_don_t_have_an_account">I don\'t have an account</string>
     <string name="create_account">Sign Up</string>
@@ -9,4 +11,8 @@
     <string name="google_error_network_error">google network error</string>
     <string name="google_error_recoverable_oauth_error">google Oauth error</string>
     <string name="oauth2_format">oauth2:%s</string>
+
+   <!-- General -->
+    <string name="password_hint">Enter Password</string>
+    <string name="hint_enter_email">Enter Email</string>
 </resources>

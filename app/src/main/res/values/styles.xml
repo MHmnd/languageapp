@@ -14,4 +14,9 @@
         <item name="android:layout_margin">2dp</item>
     </style>
 
+    <style name="HintText">
+        <item name="android:textSize">@dimen/login_buttons_text_size</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
     </resources>
