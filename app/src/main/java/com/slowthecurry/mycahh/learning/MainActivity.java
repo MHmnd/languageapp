@@ -1,5 +1,7 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends BaseActivity {
     private final String DEBUG_TAG = "MAIN ACTIVITY";
+    private Context context;
 
     //Firebabse declarations
     private FirebaseAuth firebaseAuth;
@@ -19,6 +22,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this.getApplicationContext();
 
         firebaseAuth = FirebaseAuth.getInstance();
         fbAuthStateListener =new FirebaseAuth.AuthStateListener() {
@@ -32,6 +36,9 @@ public class MainActivity extends BaseActivity {
                 }else{
                     //Nobody home y'all!
                     Log.d(DEBUG_TAG, "NOT SIGNED IN YO!!!!");
+                    //if not signed in launches LoginActivity to sign in user
+                    Intent loginActivityIntent =new Intent(context, LoginActivity.class);
+                    startActivity(loginActivityIntent);
                 }
 
             }//end @Override onAuthStateChanged()
