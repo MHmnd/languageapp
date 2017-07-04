@@ -74,7 +74,6 @@
             android:layout_height="@dimen/input_field_height"
             android:layout_marginBottom="@dimen/lv_header_text_size"
             android:background="@color/colorPrimary"
-            android:onClick="onSignInPressed"
             android:text="@string/button_sign_in"
             android:textColor="@android:color/white" />
 

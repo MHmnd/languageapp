@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.slowthecurry.mycahh.learning">
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,10 +21,9 @@
         </activity>
         <activity android:name=".Greetings" />
         <activity android:name=".Language" />
-        <activity android:name=".LogIn" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity"/>
     </application>
 
 </manifest>
