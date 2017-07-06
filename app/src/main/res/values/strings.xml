@@ -19,4 +19,5 @@
     <string name="hint_enter_email">Enter Email</string>
     <string name="enter_user_name">Enter User Name</string>
     <string name="log_out">Log Out</string>
+    <string name="category_basics">Basics</string>
 </resources>
