@@ -1,3 +1,7 @@
+package com.slowthecurry.mycahh.learning;
+
+import java.util.ArrayList;
+
 /**
  * Created by Mycah on 7/6/2017.
  * Class to mirror structure on Firebase Databes to build objects to
@@ -5,6 +9,8 @@
  */
 
 public class Categories {
+    String Title;
+    ArrayList<subCategories> subCategoriesArrayList;
 
     public class subCategories{
         String Title;
