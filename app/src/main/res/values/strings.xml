@@ -14,10 +14,12 @@
     <string name="google_error_recoverable_oauth_error">google Oauth error</string>
     <string name="oauth2_format">oauth2:%s</string>
 
-   <!-- General -->
+    <!-- General -->
     <string name="password_hint">Enter Password</string>
     <string name="hint_enter_email">Enter Email</string>
     <string name="enter_user_name">Enter User Name</string>
     <string name="log_out">Log Out</string>
     <string name="category_basics">Basics</string>
+    <string name="add_stuff">Add Stuff</string>
+    <string name="title_activity_add_entry">Add Entry</string>
 </resources>

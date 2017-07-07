@@ -13,6 +13,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends BaseActivity {
     private final String DEBUG_TAG = "MAIN ACTIVITY";
@@ -21,6 +23,8 @@ public class MainActivity extends BaseActivity {
     //Firebabse declarations
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fbAuthStateListener;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
 
     //UI components
     Button logOutButton;
@@ -32,6 +36,7 @@ public class MainActivity extends BaseActivity {
         context = this.getApplicationContext();
         initializeUI();
 
+        //Authentication logic
         firebaseAuth = FirebaseAuth.getInstance();
         fbAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -41,10 +46,12 @@ public class MainActivity extends BaseActivity {
                 if (currentUser != null) {
                     //currentUser is signed in
                     Log.d(DEBUG_TAG, currentUser.getProviderId());
+                    addButton(currentUser);
                 } else {
                     //Nobody home y'all!
                     Log.d(DEBUG_TAG, "NOT SIGNED IN YO!!!!");
                     //if not signed in launches LoginActivity to sign in user
+
                     Intent loginActivityIntent = new Intent(context, LoginActivity.class);
                     startActivity(loginActivityIntent);
                 }
@@ -64,19 +71,51 @@ public class MainActivity extends BaseActivity {
                 Log.d(DEBUG_TAG, "log out pressed");
             }
         });
-    }//end onCreate()
 
+        //Firebase Database logic
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(Constants.CATEGORIES);
+
+    }//end onCreate()
 
     private void initializeUI() {
         logOutButton = (Button) findViewById(R.id.log_out_button);
 
-    }
+    }//end initializeUI()
 
+    private void addButton(FirebaseUser user){
+        Button addStuffButton = (Button) findViewById(R.id.add_item_button);
+        try {
+            if (user.getUid().equals(Constants.ADMIN_ID)) {
+                addStuffButton.setVisibility(View.VISIBLE);
+
+                addStuffButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent addEntry = new Intent(getApplicationContext(), AddEntry.class);
+                        startActivity(addEntry);
+                    }
+                });
+            }else {
+                addStuffButton.setVisibility(View.GONE);
+            }
+        }catch (NullPointerException e){
+            Log.d(DEBUG_TAG, "UID NULL");
+        }
+
+    }
     @Override
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(fbAuthStateListener);
     }//end onStart()
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        addButton(user);
+    }
 
     @Override
     protected void onStop() {

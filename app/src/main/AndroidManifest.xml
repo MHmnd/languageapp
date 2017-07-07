@@ -23,7 +23,16 @@
         <activity android:name=".Language" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".AddEntry"
+            android:label="@string/title_activity_add_entry"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.slowthecurry.mycahh.learning.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

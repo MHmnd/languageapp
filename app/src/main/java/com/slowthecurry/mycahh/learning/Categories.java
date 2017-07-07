@@ -9,21 +9,45 @@ import java.util.ArrayList;
  */
 
 public class Categories {
-    String Title;
+    String title;
     ArrayList<subCategories> subCategoriesArrayList;
 
+    public Categories() {
+    }
+
+    public Categories(String title, ArrayList<subCategories> subCategoriesArrayList) {
+        this.title = title;
+        this.subCategoriesArrayList = subCategoriesArrayList;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<subCategories> getSubCategoriesArrayList() {
+        return subCategoriesArrayList;
+    }
+
+    public void setSubCategoriesArrayList(ArrayList<subCategories> subCategoriesArrayList) {
+        this.subCategoriesArrayList = subCategoriesArrayList;
+    }
+
     public class subCategories{
-        String Title;
+        String subTitle;
 
         public subCategories() {
         }
 
-        public String getTitle() {
-            return Title;
+        public String getSubTitle() {
+            return subTitle;
         }
 
-        public void setTitle(String title) {
-            Title = title;
+        public void setSubTitle(String subTitle) {
+            this.subTitle = subTitle;
         }
 
         //inner class for individual words and phrases.

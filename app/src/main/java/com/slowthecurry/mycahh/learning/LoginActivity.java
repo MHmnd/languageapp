@@ -106,6 +106,7 @@ public class LoginActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(fbAuthStateListener);
+        mAuthProgressDialog.dismiss();
     }//end onStop()
 
     @Override

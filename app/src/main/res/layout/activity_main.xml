@@ -31,5 +31,15 @@
         android:background="@color/colorPrimary"
         android:text="@string/log_out"
         android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/add_item_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginBottom="@dimen/lv_header_text_size"
+            android:background="@color/colorPrimary"
+            android:text="@string/add_stuff"
+            android:visibility="gone"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>
