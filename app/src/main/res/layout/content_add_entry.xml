@@ -5,8 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.slowthecurry.mycahh.learning.AddEntry"
     tools:showIn="@layout/activity_add_entry">
+    
+    <Spinner
+        android:id="@+id/categories_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"/>
+    <Spinner
+        android:id="@+id/sub_categories_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"/>
 
+    <EditText
+        android:id="@+id/add_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="@string/english"/>
+    <EditText
+        android:id="@+id/add_tongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Tongan"/>
 </LinearLayout>

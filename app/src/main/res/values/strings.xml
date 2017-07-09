@@ -22,4 +22,74 @@
     <string name="category_basics">Basics</string>
     <string name="add_stuff">Add Stuff</string>
     <string name="title_activity_add_entry">Add Entry</string>
+    <string name="category">Category</string>
+    <string name="sub_category">Sub Category</string>
+    <string name="english">English</string>
+
+    <string-array name="categories_array">
+        <item>Basics</item>
+        <item>Preaching Skills</item>
+        <item>Teaching Skills</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="basics_array">
+        <item>Tense Markers</item>
+        <item>Sentence Structure</item>
+        <item>Greetings and Introductions</item>
+        <item>Goodbyes</item>
+        <item>Vocabulary</item>
+        <item>Numbers</item>
+        <item>Family</item>
+        <item>Colors</item>
+    </string-array>
+
+    <string-array name="preaching_array">
+        <item>Greatings and Introductions</item>
+        <item>Language</item>
+        <item>After the Greeting</item>
+        <item>Presenting a Topic</item>
+        <item>Asking Questions</item>
+        <item>Using the Bible</item>
+        <item>Questions About Specific Topics</item>
+        <item>Using Literature</item>
+        <item>Using Electronic Devices</item>
+        <item>Offering Literature</item>
+        <item>Offering to Return</item>
+        <item>Return Visits</item>
+        <item>Offering a Bible Study</item>
+        <item>Public Witnessing</item>
+    </string-array>
+
+    <string-array name="teaching_array">
+        <item>Books of the Bible</item>
+        <item>Useful Words and Phrases About the Bible</item>
+        <item>Talking About the Contents of the Bible</item>
+        <item>Introducing Scriptures</item>
+        <item>After Reading a Scripture</item>
+        <item>Types of Literature</item>
+        <item>Sections of Literature</item>
+        <item>Reading</item>
+        <item>Teaching</item>
+        <item>Learning</item>
+        <item>Reasoning and Thinking</item>
+        <item>Communication</item>
+        <item>Meetings</item>
+        <item>Useful Words and Phrases for Meetings</item>
+        <item>The Life and Ministry Meeting</item>
+        <item>Items and Assignments</item>
+        <item>Bible Studies and Discussions</item>
+        <item>Demonstrations, Interviews and Experiences</item>
+        <item>Conducting Meetings for Field Service</item>
+        <item>Simple Announcments</item>
+        <item>Introducing Songs and Prayers</item>
+        <item>Giving Encouragement and Commendation</item>
+    </string-array>
+
+    <string-array name="other_array">
+        <item>Theocratic Vocab</item>
+        <item>Social</item>
+        <item>Vocab</item>
+    </string-array>
+
 </resources>
