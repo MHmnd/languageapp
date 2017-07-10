@@ -124,5 +124,9 @@ public class MainActivity extends BaseActivity {
     }//end onStop()
 
 
+    /**
+     * Pulls a list of the categories and their sub categories and builds an ArrayList to
+     * be used to populate the Categories list.
+     */
     //end MainActivity
 }

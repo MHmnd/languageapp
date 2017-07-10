@@ -1,10 +1,7 @@
 package com.slowthecurry.mycahh.learning;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -64,14 +61,16 @@ public class AddEntry extends BaseActivity
             @Override
             public void onClick(View view) {
                 if(englishEntry.getText() != null && tonganEntry.getText() != null){
-                    Categories.subCategories.entrie entrie = subCategories.new entrie();
-                    entrie.setEnglish(englishEntry.getText().toString());
-                    entrie.setTongan(tonganEntry.getText().toString());
+                    Categories.subCategories.entry entry = subCategories.new entry();
+                    entry.setEnglish(englishEntry.getText().toString());
+                    entry.setTongan(tonganEntry.getText().toString());
                     String key = databaseReference.child(categories.getTitle()).child(subCategories.getSubTitle()).push().getKey();
-                    entrie.setKey(key);
-                    databaseReference.child(categories.getTitle()).child(subCategories.getSubTitle()).child(key).setValue(entrie);
+                    entry.setKey(key);
+                    databaseReference.child(categories.getTitle()).child(subCategories.getSubTitle()).child(key).setValue(entry);
+                    Toast.makeText(context, entry.getEnglish() + " was added.", Toast.LENGTH_SHORT).show();
                 }
                 Log.d("ADD ENTRY", categories.getTitle() + " " + subCategories.getSubTitle());
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

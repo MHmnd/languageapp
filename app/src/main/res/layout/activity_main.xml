@@ -12,17 +12,10 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/category_basics"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height= "wrap_content"
-            android:minHeight="2dp"
-            android:background="@color/divider"
-        />
-
+     <ListView
+         android:id="@+id/categories_list"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>
     <Button
         android:id="@+id/log_out_button"
         android:layout_width="match_parent"

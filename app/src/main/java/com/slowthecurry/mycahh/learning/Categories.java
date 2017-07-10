@@ -38,16 +38,16 @@ public class Categories {
 
     public class subCategories{
         String subTitle;
-        ArrayList<entrie> entries;
+        ArrayList<entry> entries;
 
         public subCategories() {
         }
 
-        public ArrayList<entrie> getEntries() {
+        public ArrayList<entry> getEntries() {
             return entries;
         }
 
-        public void setEntries(ArrayList<entrie> entries) {
+        public void setEntries(ArrayList<entry> entries) {
             this.entries = entries;
         }
 
@@ -60,12 +60,12 @@ public class Categories {
         }
 
         //inner class for individual words and phrases.
-        public class entrie {
+        public class entry {
             String tongan;
             String english;
             String key;
 
-            public entrie() {
+            public entry() {
             }
 
             public String getKey() {
