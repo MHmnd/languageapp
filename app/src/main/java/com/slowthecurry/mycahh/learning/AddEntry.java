@@ -15,15 +15,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddEntry extends BaseActivity
-        implements AdapterView.OnItemSelectedListener{
-    private Categories categories;
-    private Categories.subCategories subCategories;
+        implements AdapterView.OnItemSelectedListener {
+    private String category;
+    private String subCategory;
+    private LanguageEntry languageEntry;
 
     //UI elements
     private Spinner categoriesSpinner;
     private Spinner subCategoriesSpinner;
-    private EditText englishEntry;
-    private EditText tonganEntry;
+    private EditText english;
+    private EditText tongan;
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -35,13 +36,11 @@ public class AddEntry extends BaseActivity
         setContentView(R.layout.activity_add_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        languageEntry = new LanguageEntry();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-
-        categories = new Categories();
-        subCategories = categories.new subCategories();
         categoriesSpinner = (Spinner) findViewById(R.id.categories_spinner);
         subCategoriesSpinner = (Spinner) findViewById(R.id.sub_categories_spinner);
         categoriesSpinner.setOnItemSelectedListener(this);
@@ -51,25 +50,30 @@ public class AddEntry extends BaseActivity
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriesSpinner.setAdapter(categoryAdapter);
 
-        englishEntry = (EditText) findViewById(R.id.add_english);
-        tonganEntry = (EditText) findViewById(R.id.add_tongan);
-
+        english = (EditText) findViewById(R.id.add_english);
+        tongan = (EditText) findViewById(R.id.add_tongan);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(englishEntry.getText() != null && tonganEntry.getText() != null){
-                    Categories.subCategories.entry entry = subCategories.new entry();
-                    entry.setEnglish(englishEntry.getText().toString());
-                    entry.setTongan(tonganEntry.getText().toString());
-                    String key = databaseReference.child(categories.getTitle()).child(subCategories.getSubTitle()).push().getKey();
-                    entry.setKey(key);
-                    databaseReference.child(categories.getTitle()).child(subCategories.getSubTitle()).child(key).setValue(entry);
-                    Toast.makeText(context, entry.getEnglish() + " was added.", Toast.LENGTH_SHORT).show();
+                if (english.getText() != null && tongan.getText() != null) {
+                    languageEntry.setEnglish(english.getText().toString());
+                    languageEntry.setTongan(tongan.getText().toString());
+                    String key = databaseReference.child(category)
+                            .child(subCategory)
+                            .push()
+                            .getKey();
+                    languageEntry.setKey(key);
+                    databaseReference.child(category)
+                            .child(subCategory)
+                            .child(key)
+                            .setValue(languageEntry);
+                    Toast.makeText(context, languageEntry.getEnglish() + " was added.",
+                            Toast.LENGTH_SHORT).show();
                 }
-                Log.d("ADD ENTRY", categories.getTitle() + " " + subCategories.getSubTitle());
+                Log.d("ADD ENTRY", category + " " + subCategory);
 
             }
         });
@@ -78,41 +82,46 @@ public class AddEntry extends BaseActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
+        switch (parent.getId()) {
             case R.id.categories_spinner:
-            categories.setTitle(parent.getItemAtPosition(position).toString());
-            Log.d("ADD ENTRY", categories.getTitle());
-            ArrayAdapter<CharSequence> subCategoriesAdapter =
-                    ArrayAdapter.createFromResource(this, R.array.basics_array, android.R.layout.simple_spinner_item);
+                category = parent.getItemAtPosition(position).toString();
+                Log.d("ADD ENTRY", category);
+                ArrayAdapter<CharSequence> subCategoriesAdapter =
+                        ArrayAdapter.createFromResource(this, R.array.basics_array, android.R.layout.simple_spinner_item);
 
-            if (categories.getTitle() != null) {
-                if (categories.getTitle().equals("Basics")) {
-                    subCategoriesAdapter =
-                            ArrayAdapter.createFromResource(this, R.array.basics_array, android.R.layout.simple_spinner_item);
-                    subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    subCategoriesSpinner.setAdapter(subCategoriesAdapter);
-                } else if (categories.getTitle().equals("Preaching Skills")) {
-                    subCategoriesAdapter =
-                            ArrayAdapter.createFromResource(this, R.array.preaching_array, android.R.layout.simple_spinner_item);
-                    subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    subCategoriesSpinner.setAdapter(subCategoriesAdapter);
-                } else if (categories.getTitle().equals("Teaching Skills")) {
-                    subCategoriesAdapter =
-                            ArrayAdapter.createFromResource(this, R.array.teaching_array, android.R.layout.simple_spinner_item);
-                    subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    subCategoriesSpinner.setAdapter(subCategoriesAdapter);
-                } else if (categories.getTitle().equals("Other")) {
-                    subCategoriesAdapter =
-                            ArrayAdapter.createFromResource(this, R.array.other_array, android.R.layout.simple_spinner_item);
-                    subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    subCategoriesSpinner.setAdapter(subCategoriesAdapter);
+                if (category != null) {
+                    switch (category) {
+                        case "Basics":
+                            subCategoriesAdapter =
+                                    ArrayAdapter.createFromResource(this, R.array.basics_array, android.R.layout.simple_spinner_item);
+                            subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            subCategoriesSpinner.setAdapter(subCategoriesAdapter);
+                            break;
+                        case "Preaching Skills":
+                            subCategoriesAdapter =
+                                    ArrayAdapter.createFromResource(this, R.array.preaching_array, android.R.layout.simple_spinner_item);
+                            subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            subCategoriesSpinner.setAdapter(subCategoriesAdapter);
+                            break;
+                        case "Teaching Skills":
+                            subCategoriesAdapter =
+                                    ArrayAdapter.createFromResource(this, R.array.teaching_array, android.R.layout.simple_spinner_item);
+                            subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            subCategoriesSpinner.setAdapter(subCategoriesAdapter);
+                            break;
+                        case "Other":
+                            subCategoriesAdapter =
+                                    ArrayAdapter.createFromResource(this, R.array.other_array, android.R.layout.simple_spinner_item);
+                            subCategoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            subCategoriesSpinner.setAdapter(subCategoriesAdapter);
+                            break;
+                    }
                 }
-            }
-            subCategoriesAdapter.notifyDataSetChanged();
+                subCategoriesAdapter.notifyDataSetChanged();
                 break;
             case R.id.sub_categories_spinner:
-            Log.d("SUB CATEGORY", parent.getItemAtPosition(position).toString());
-            subCategories.setSubTitle(parent.getItemAtPosition(position).toString());
+                Log.d("SUB CATEGORY", parent.getItemAtPosition(position).toString());
+                subCategory = parent.getItemAtPosition(position).toString();
                 break;
         }
     }

@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class MainActivity extends BaseActivity {
     private final String DEBUG_TAG = "MAIN ACTIVITY";
     private Context context;
@@ -126,7 +128,13 @@ public class MainActivity extends BaseActivity {
 
     /**
      * Pulls a list of the categories and their sub categories and builds an ArrayList to
-     * be used to populate the Categories list.
+     * be used to populate the LanguageEntry list.
      */
+    private ArrayList<String> buildCategories(){
+        ArrayList<String> catergoriesArraList = new ArrayList<String>();
+
+
+        return catergoriesArraList;
+    }
     //end MainActivity
 }
