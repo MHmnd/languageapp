@@ -3,11 +3,13 @@ package com.slowthecurry.mycahh.learning;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import org.w3c.dom.Text;
 
@@ -17,23 +19,29 @@ import java.util.ArrayList;
  * Created by Mycah on 7/6/2017.
  */
 
-public class CategoriesAdapter extends ArrayAdapter<String> {
-    public CategoriesAdapter(Context context, ArrayList<String> category){
-        super(context, 0, category);
+public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView subCategoryTitleView;
+
+        public ViewHolder(TextView currentView) {
+            super(currentView);
+            subCategoryTitleView = currentView;
+        }
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String title = getItem(position);
-        View categoryCard = convertView;
-        if (categoryCard == null) {
-            categoryCard = LayoutInflater.from(getContext())
-                    .inflate(R.layout.categories_list_item, parent, false);
-        }
-        TextView categoryTitleView = (TextView) categoryCard.findViewById(R.id.category_lable);
-        categoryTitleView.setText(title);
+    public CategoriesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
 
-    return categoryCard;
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
     }
 }
