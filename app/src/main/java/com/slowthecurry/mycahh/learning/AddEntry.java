@@ -58,7 +58,8 @@ public class AddEntry extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (english.getText() != null && tongan.getText() != null) {
+                if (!english.getText().toString().equals("")
+                        && !tongan.getText().toString().equals("")) {
                     languageEntry.setEnglish(english.getText().toString());
                     languageEntry.setTongan(tongan.getText().toString());
                     String key = databaseReference.child(category)
@@ -70,9 +71,16 @@ public class AddEntry extends BaseActivity
                             .child(subCategory)
                             .child(key)
                             .setValue(languageEntry);
+
+
                     Toast.makeText(context, languageEntry.getEnglish() + " was added.",
                             Toast.LENGTH_SHORT).show();
                 }
+                //sets subTitle for use in RecyclerViews in MainActivity
+                databaseReference.child(category)
+                        .child(subCategory)
+                        .child(Constants.SUB_CATEGORY_TITLE)
+                        .setValue(subCategory);
                 Log.d("ADD ENTRY", category + " " + subCategory);
 
             }

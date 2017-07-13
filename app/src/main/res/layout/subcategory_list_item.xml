@@ -2,20 +2,26 @@
 <LinearLayout
     android:id="@+id/sub_categories_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="128dp"
+    android:layout_width="192dp"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:paddingTop="8dp">
 
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/divider"/>
     <Button
         android:id="@+id/sub_category_title_view"
         style="@style/TextButton"
-        android:background="@android:color/white"
+        android:background="@android:color/background_light"
         android:minHeight="48dp"
         android:padding="8dp"
         android:gravity="center"
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"/>
+        android:focusable="true" />
 
 </LinearLayout>

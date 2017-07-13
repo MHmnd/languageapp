@@ -26,6 +26,9 @@
     <string name="sub_category">Sub Category</string>
     <string name="english">English</string>
     <string name="preaching_skills">Preaching Skills</string>
+    <string name="category_preaching">Preaching Skills</string>
+    <string name="category_teaching">Teaching Skills</string>
+    <string name="category_other">Other</string>
 
     <string-array name="categories_array">
         <item>Basics</item>

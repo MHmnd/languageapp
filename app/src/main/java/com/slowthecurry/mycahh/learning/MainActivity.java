@@ -41,11 +41,18 @@ public class MainActivity extends BaseActivity {
     TextView preachingText;
     TextView teachingText;
     TextView otherText;
+
     RecyclerView basicsRecyclerView;
     RecyclerView preachingRecyclerView;
+    RecyclerView teachingRecyclerView;
+    RecyclerView otherRecyclerView;
+
     LinearLayoutManager linearLayoutManager;
     SubCategoriesAdapter basicsAdapter;
     SubCategoriesAdapter preachingAdapter;
+    SubCategoriesAdapter teachingAdapter;
+    SubCategoriesAdapter otherAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,17 +97,22 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        //Firebase Database logic
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
         //build recyclerViews
-        buildSubCategoriesGroup("Basics");
+        buildSubCategoriesGroup(getString(R.string.category_basics));
+        buildSubCategoriesGroup(getString(R.string.category_preaching));
+        buildSubCategoriesGroup(getString(R.string.category_teaching));
+        buildSubCategoriesGroup(getString(R.string.category_other));
     }//end onCreate()
 
     private void initializeUI() {
         logOutButton = (Button) findViewById(R.id.log_out_button);
         basicsRecyclerView = (RecyclerView) findViewById(R.id.basics_recycler);
+        preachingRecyclerView = (RecyclerView) findViewById(R.id.preaching_recycler);
+        teachingRecyclerView = (RecyclerView) findViewById(R.id.teaching_recycler);
+        otherRecyclerView = (RecyclerView) findViewById(R.id.other_recycler);
     }//end initializeUI()
 
     private void addButton(FirebaseUser user){
@@ -128,13 +140,17 @@ public class MainActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(fbAuthStateListener);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
     }//end onStart()
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         addButton(user);
+
     }
 
     @Override
@@ -148,7 +164,7 @@ public class MainActivity extends BaseActivity {
      * Pulls a list of the categories and their sub categories and builds an ArrayList to
      * be used to populate the LanguageEntry list.
      */
-    private ArrayList<String> buildSubCategoriesGroup(String category){
+    private ArrayList<String> buildSubCategoriesGroup(final String category){
         final ArrayList<String> catergoriesArraList = new ArrayList<String>();
         Query query = databaseReference.child(category);
         query.addValueEventListener(new ValueEventListener() {
@@ -158,12 +174,34 @@ public class MainActivity extends BaseActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String subCategory = snapshot.child(Constants.SUB_CATEGORY_TITLE).getValue(String.class);
                     catergoriesArraList.add(subCategory);
-                    Log.w(DEBUG_TAG, subCategory);
                 }
-                linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-                basicsRecyclerView.setLayoutManager(linearLayoutManager);
-                basicsAdapter = new SubCategoriesAdapter(catergoriesArraList);
-                basicsRecyclerView.setAdapter(basicsAdapter);
+                switch (category) {
+                    case Constants.BASICS:
+                        linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        basicsRecyclerView.setLayoutManager(linearLayoutManager);
+                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        basicsRecyclerView.setAdapter(basicsAdapter);
+                        break;
+                    case Constants.PREACHING:
+                        linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        preachingRecyclerView.setLayoutManager(linearLayoutManager);
+                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        preachingRecyclerView.setAdapter(preachingAdapter);
+                        break;
+                    case Constants.TEACHING:
+                        linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        teachingRecyclerView.setLayoutManager(linearLayoutManager);
+                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        teachingRecyclerView.setAdapter(teachingAdapter);
+                        break;
+                    case Constants.OTHER:
+                        linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        otherRecyclerView.setLayoutManager(linearLayoutManager);
+                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        otherRecyclerView.setAdapter(otherAdapter);
+                        break;
+                }
+
             }
 
             @Override
