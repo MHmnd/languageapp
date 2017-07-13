@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/sub_categories_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="128dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/sub_category_title_view"
+        style="@style/TextButton"
+        android:background="@android:color/white"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"/>
+
+</LinearLayout>

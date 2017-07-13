@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.slowthecurry.mycahh.learning.MainActivity">
+
     <LinearLayout
         android:id="@+id/linear_layout_create_account_activity"
         android:layout_width="match_parent"
@@ -12,18 +13,32 @@
         android:gravity="center"
         android:orientation="vertical">
 
-     <ListView
-         android:id="@+id/categories_list"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"/>
-    <Button
-        android:id="@+id/log_out_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/input_field_height"
-        android:layout_marginBottom="@dimen/lv_header_text_size"
-        android:background="@color/colorPrimary"
-        android:text="@string/log_out"
-        android:textColor="@android:color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_basics"
+            android:layout_gravity="start"
+            style="@style/ListHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/basics_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <Button
+            android:id="@+id/log_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginBottom="@dimen/lv_header_text_size"
+            android:background="@color/colorPrimary"
+            android:text="@string/log_out"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/add_item_button"
@@ -32,7 +47,7 @@
             android:layout_marginBottom="@dimen/lv_header_text_size"
             android:background="@color/colorPrimary"
             android:text="@string/add_stuff"
-            android:visibility="gone"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
