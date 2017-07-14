@@ -179,25 +179,25 @@ public class MainActivity extends BaseActivity {
                     case Constants.BASICS:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         basicsRecyclerView.setLayoutManager(linearLayoutManager);
-                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
                         basicsRecyclerView.setAdapter(basicsAdapter);
                         break;
                     case Constants.PREACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         preachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
                         preachingRecyclerView.setAdapter(preachingAdapter);
                         break;
                     case Constants.TEACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         teachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
                         teachingRecyclerView.setAdapter(teachingAdapter);
                         break;
                     case Constants.OTHER:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         otherRecyclerView.setLayoutManager(linearLayoutManager);
-                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList);
+                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
                         otherRecyclerView.setAdapter(otherAdapter);
                         break;
                 }

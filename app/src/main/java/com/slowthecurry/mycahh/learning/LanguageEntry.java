@@ -15,6 +15,15 @@ public class LanguageEntry {
     String tongan;
     String english;
     String key;
+    Integer orderNumber;
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 
     public String getKey() {
         return key;

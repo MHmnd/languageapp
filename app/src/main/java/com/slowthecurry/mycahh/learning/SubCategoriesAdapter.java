@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdapter.ViewHolder> {
 
     private ArrayList<String> subCategories;
+    private String category;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final Button subCategoryTitleView;
@@ -34,6 +35,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
                 public void onClick(View v) {
                     Intent goToSubCategoryList = new Intent(context, SubCategoryListActivity.class);
                     goToSubCategoryList.putExtra(Constants.SUB_CATEGORY_TITLE, subCategoryTitleView.getText().toString());
+                    goToSubCategoryList.putExtra(Constants.CATEGORIES, category);
                     Log.d("CLICKED", subCategoryTitleView.getText().toString());
                     context.startActivity(goToSubCategoryList);
                 }
@@ -46,8 +48,9 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
     }
 
-    public SubCategoriesAdapter(ArrayList<String> subCategories) {
+    public SubCategoriesAdapter(ArrayList<String> subCategories, String category) {
         this.subCategories = subCategories;
+        this.category = category;
     }
 
     @Override

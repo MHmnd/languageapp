@@ -12,5 +12,6 @@ public class Constants {
     public final static String TEACHING = "Teaching Skills";
     public final static String OTHER = "Other";
     public final static String SUB_CATEGORY_TITLE = "subTitle";
+    public final static String ORDER_NUMBER = "orderNumber";
 
 }

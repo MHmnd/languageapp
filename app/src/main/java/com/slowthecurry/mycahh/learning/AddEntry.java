@@ -25,6 +25,7 @@ public class AddEntry extends BaseActivity
     private Spinner subCategoriesSpinner;
     private EditText english;
     private EditText tongan;
+    private EditText orderNumber;
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -52,6 +53,7 @@ public class AddEntry extends BaseActivity
 
         english = (EditText) findViewById(R.id.add_english);
         tongan = (EditText) findViewById(R.id.add_tongan);
+        orderNumber = (EditText) findViewById(R.id.order_number);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -59,9 +61,13 @@ public class AddEntry extends BaseActivity
             @Override
             public void onClick(View view) {
                 if (!english.getText().toString().equals("")
-                        && !tongan.getText().toString().equals("")) {
+                        && !tongan.getText().toString().equals("")
+                        && !orderNumber.getText().toString().equals("")) {
                     languageEntry.setEnglish(english.getText().toString());
                     languageEntry.setTongan(tongan.getText().toString());
+
+                    Integer orderInt = Integer.parseInt(orderNumber.getText().toString());
+                    languageEntry.setOrderNumber(orderInt);
                     String key = databaseReference.child(category)
                             .child(subCategory)
                             .push()
@@ -72,7 +78,8 @@ public class AddEntry extends BaseActivity
                             .child(key)
                             .setValue(languageEntry);
 
-
+                    english.getText().clear();
+                    tongan.getText().clear();
                     Toast.makeText(context, languageEntry.getEnglish() + " was added.",
                             Toast.LENGTH_SHORT).show();
                 }

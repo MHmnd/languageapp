@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:minHeight="72dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:gravity="center_vertical">
+
+
+    <TextView
+        android:text="Something english"
+        android:id="@+id/english_entry"
+        style="@style/English"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="24dp"/>
+
+    <TextView
+        android:text="Ko ha me'a fakatonga"
+        android:id="@+id/tongan_entry"
+        style="@style/Tongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="24dp" />
+</LinearLayout>

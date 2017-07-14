@@ -35,8 +35,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:hint="Tongan"
+        android:hint="@string/tongan"
         android:maxLines="1"
         android:inputType="textCapSentences"
+        android:imeOptions="actionNext"/>
+    <EditText
+        android:id="@+id/order_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Number"
+        android:maxLines="1"
+        android:inputType="number"
         android:imeOptions="actionDone"/>
 </LinearLayout>
