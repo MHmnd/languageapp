@@ -114,26 +114,47 @@ public class MainActivity extends BaseActivity {
         teachingRecyclerView = (RecyclerView) findViewById(R.id.teaching_recycler);
         otherRecyclerView = (RecyclerView) findViewById(R.id.other_recycler);
     }//end initializeUI()
+    //
 
-    private void addButton(FirebaseUser user){
-        Button addStuffButton = (Button) findViewById(R.id.add_item_button);
-        try {
-            if (user.getUid().equals(Constants.ADMIN_ID)) {
-                addStuffButton.setVisibility(View.VISIBLE);
+    private void addButton(final FirebaseUser user){
+        final Button addStuffButton = (Button) findViewById(R.id.add_item_button);
+        Query adminQuery = databaseReference.child("ADMIN");
+        adminQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String currentUID = user.getUid();
+                Boolean isUserAdmin = false;
 
-                addStuffButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent addEntry = new Intent(getApplicationContext(), AddEntry.class);
-                        startActivity(addEntry);
+                for(DataSnapshot adminUsers : dataSnapshot.getChildren()){
+                    if (currentUID.equals(adminUsers.getValue(String.class))) {
+                        isUserAdmin = true;
                     }
-                });
-            }else {
-                addStuffButton.setVisibility(View.GONE);
+                    try {
+                        if (isUserAdmin) {
+                            addStuffButton.setVisibility(View.VISIBLE);
+
+                            addStuffButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent addEntry = new Intent(getApplicationContext(), AddEntry.class);
+                                    startActivity(addEntry);
+                                }
+                            });
+                        }else {
+                            addStuffButton.setVisibility(View.GONE);
+                        }
+                    }catch (NullPointerException e){
+                        Log.d(DEBUG_TAG, "UID NULL");
+                    }
+
+                }
             }
-        }catch (NullPointerException e){
-            Log.d(DEBUG_TAG, "UID NULL");
-        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
     @Override

@@ -71,26 +71,26 @@ public class LoginActivity extends BaseActivity {
             }
         };
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        /*signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInPassword();
             }
         });
-
+*/
         /**
          * Call signInPassword() when user taps "Done" keyboard action
-         */
+
         mEditTextPasswordInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 
-                if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                /*if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
                     signInPassword();
                 }
                 return true;
             }
-        });
+        });.*/
 
         // Configure Google Sign In
 
@@ -142,32 +142,33 @@ public class LoginActivity extends BaseActivity {
      * Link layout elements from XML and setup the progress dialog
      */
     public void initializeScreen() {
-        mEditTextEmailInput = (EditText) findViewById(R.id.edit_text_email);
+
+       /* mEditTextEmailInput = (EditText) findViewById(R.id.edit_text_email);
         mEditTextPasswordInput = (EditText) findViewById(R.id.edit_text_password);
         LinearLayout linearLayoutLoginActivity = (LinearLayout) findViewById(R.id.linear_layout_login_activity);
 
-        /* Setup the progress dialog that is displayed later when authenticating with Firebase */
+        /*Setup the progress dialog that is displayed later when authenticating with Firebase */
         mAuthProgressDialog = new ProgressDialog(this);
         mAuthProgressDialog.setTitle(getString(R.string.progress_dialog_loading));
         mAuthProgressDialog.setMessage(getString(R.string.progress_dialog_authenticating_with_firebase));
         mAuthProgressDialog.setCancelable(false);
 
-        /* Setup Google Sign In */
+       /* Setup Google Sign In */
         setupGoogleSignIn();
-        signInButton = (Button) findViewById(R.id.login_with_password);
+       /* signInButton = (Button) findViewById(R.id.login_with_password);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInPassword();
             }
         });
-
+*/
     }//end initializeScreen
 
     /**
      * Sign in with Password provider (used when user taps "Done" action on keyboard)
      */
-    public void signInPassword() {
+    /*public void signInPassword() {
         final String email = mEditTextEmailInput.getText().toString();
         final String password = mEditTextPasswordInput.getText().toString();
 
@@ -185,7 +186,7 @@ public class LoginActivity extends BaseActivity {
 
                     }
                 });
-    }
+    }*/
 
     /**
      * Helper method that makes sure a user is created if the user

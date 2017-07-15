@@ -6,7 +6,10 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:contextClickable="true"
+    android:focusable="true">
 
     <View
         android:layout_width="2dp"

@@ -39,11 +39,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
             currentView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast toast = new Toast(currentView.getContext());
-                    toast.setText("Audio coming soon!");
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.show();
-
+                    Toast.makeText(currentView.getContext(), "Audio coming soon!", Toast.LENGTH_SHORT).show();
             }
             });
         }

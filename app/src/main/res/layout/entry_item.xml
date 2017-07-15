@@ -7,7 +7,10 @@
     android:minHeight="72dp"
     android:paddingEnd="16dp"
     android:paddingStart="16dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:contextClickable="true"
+    android:focusable="true">
 
 
     <TextView

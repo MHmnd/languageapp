@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Slide;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -31,11 +32,16 @@ public class SubCategoryListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Slide slide = new Slide(5);
+        slide.setDuration(700);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReturnTransition(slide);
         setContentView(R.layout.activity_sub_category_list);
         Intent launchingIntent = getIntent();
         initializeUI();
         String category;
         String header;
+
 
         if (launchingIntent.hasExtra(Constants.SUB_CATEGORY_TITLE)
                 && launchingIntent.hasExtra(Constants.CATEGORIES)) {
