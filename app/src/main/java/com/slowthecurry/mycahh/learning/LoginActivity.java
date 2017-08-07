@@ -27,7 +27,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Represents Sign in screen and functionality of the app
@@ -227,6 +233,26 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference reference = database.getReference();
+                    final FirebaseUser user = firebaseAuth.getCurrentUser();
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String uid = user.getUid();
+                            try{
+                                dataSnapshot.child(Constants.USERS).child(uid).getValue(String.class);
+                                Log.d("LOGIN", "TRIED");
+                            }catch (Exception e ){
+                                reference.child(Constants.USERS).child(uid).setValue(uid);
+                                Log.d("LOGIN", "FAID");
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                     finish();
                 } else {
                     Toast.makeText(context, "Google Authentication failed", Toast.LENGTH_LONG).show();

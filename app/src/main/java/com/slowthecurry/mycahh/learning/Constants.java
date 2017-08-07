@@ -5,7 +5,7 @@ package com.slowthecurry.mycahh.learning;
  */
 
 public class Constants {
-    public final static String ADMIN_ID = "ZGzg8Ibxy2Z6rVbH2ogUgfSn2RG3";
+    public final static String USERS = "users";
     public final static String CATEGORIES = "categories";
     public final static String BASICS = "Basics";
     public final static String PREACHING = "Preaching Skills";
