@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
+    tools:context="com.slowthecurry.mycahh.learning.MainActivity"
+    android:background="@android:color/background_light">
+    <LinearLayout
+        android:id="@+id/linear_layout_create_account_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_basics"
+            android:layout_gravity="start"
+            style="@style/ListHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/basics_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_preaching"
+            android:layout_gravity="start"
+            style="@style/ListHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/preaching_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_teaching"
+            android:layout_gravity="start"
+            style="@style/ListHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/teaching_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_other"
+            android:layout_gravity="start"
+            style="@style/ListHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/other_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"/>
+
+        <Button
+            android:paddingTop="8dp"
+            android:id="@+id/log_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginBottom="@dimen/lv_header_text_size"
+            android:background="@color/colorPrimary"
+            android:text="@string/log_out"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/add_item_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginBottom="@dimen/lv_header_text_size"
+            android:background="@color/colorPrimary"
+            android:text="@string/add_stuff"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>
