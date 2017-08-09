@@ -2,6 +2,7 @@ package com.slowthecurry.mycahh.learning;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -22,6 +24,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -122,6 +125,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navigationHeader = navigationView.getHeaderView(0);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        TextView navigationName = (TextView) navigationHeader.findViewById(R.id.nav_name);
+        TextView navigationEmail = (TextView) navigationHeader.findViewById(R.id.nav_email);
+
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+                navigationName.setText(name);
+                navigationEmail.setText(email);
+            };
+        }
+
+
     }//end onCreate()
 
     @Override

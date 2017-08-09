@@ -18,7 +18,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
-<!--
+
         <LinearLayout
             android:layout_width="0px"
             android:layout_height="0px"
@@ -34,19 +34,19 @@
             app:hintTextAppearance="@style/HintText">
 
             <EditText
-                android:id="@+id/edit_text_email"
+                android:id="@+id/edit_text_display_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:hint="@string/hint_enter_email"
-                android:inputType="textEmailAddress"
-                android:nextFocusDown="@+id/edit_text_password"
+                android:hint="@string/name_hint"
+                android:inputType="textCapWords"
+                android:imeOptions="actionDone"
                 android:padding="@dimen/edit_text_padding"
                 android:textColor="@color/black"
                 android:textColorHint="@color/darkgrey"
                 android:textSize="@dimen/login_buttons_text_size" />
         </android.support.design.widget.TextInputLayout>
-
+<!--
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_password"
             android:layout_width="match_parent"

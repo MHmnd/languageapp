@@ -226,33 +226,13 @@ public class LoginActivity extends BaseActivity {
     /**
      * Signs in or Creates new user using the Google Login Provider
      */
-    private void loginWithGoogle(GoogleSignInAccount account) {
+    private void loginWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    final DatabaseReference reference = database.getReference();
-                    final FirebaseUser user = firebaseAuth.getCurrentUser();
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String uid = user.getUid();
-                            try{
-                                dataSnapshot.child(Constants.USERS).child(uid).getValue(String.class);
-                                Log.d("LOGIN", "TRIED");
-                            }catch (Exception e ){
-                                reference.child(Constants.USERS).child(uid).setValue(uid);
-                                Log.d("LOGIN", "FAID");
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
                     finish();
                 } else {
                     Toast.makeText(context, "Google Authentication failed", Toast.LENGTH_LONG).show();
