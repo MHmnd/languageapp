@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +17,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
@@ -45,7 +46,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private FirebaseDatabase firebaseDatabase;
 
     //UI components
-    Button logOutButton;
     TextView basicsText;
     TextView preachingText;
     TextView teachingText;
@@ -95,18 +95,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         };//end fbAuthStateListener instantiation
 
-        logOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        firebaseAuth.signOut();
-                    }
-                });
-                Log.d(DEBUG_TAG, "log out pressed");
-            }
-        });
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -117,13 +106,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         buildSubCategoriesGroup(getString(R.string.category_teaching));
         buildSubCategoriesGroup(getString(R.string.category_other));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View navigationHeader = navigationView.getHeaderView(0);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -152,7 +141,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -162,7 +151,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
     private void initializeUI() {
-        logOutButton = (Button) findViewById(R.id.log_out_button);
         basicsRecyclerView = (RecyclerView) findViewById(R.id.basics_recycler);
         preachingRecyclerView = (RecyclerView) findViewById(R.id.preaching_recycler);
         teachingRecyclerView = (RecyclerView) findViewById(R.id.teaching_recycler);
@@ -171,7 +159,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     //
 
     private void addButton(final FirebaseUser user){
-        final Button addStuffButton = (Button) findViewById(R.id.add_item_button);
+        final FloatingActionButton addStuffButton = (FloatingActionButton) findViewById(R.id.main_fab);
         Query adminQuery = databaseReference.child("ADMIN");
         adminQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -290,7 +278,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            return false;
+          int id = item.getItemId();
+
+           switch (id){
+               case R.id.nav_tutorials:
+                   Intent startTutorials = new Intent(this, Tutorials.class);
+                   startActivity(startTutorials);
+                   break;
+               case R.id.nav_collections:
+                   Intent startCollections = new Intent(this, Collections.class);
+                   startActivity(startCollections);
+                   break;
+               case R.id.nav_log_out:
+                   Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                       @Override
+                       public void onResult(@NonNull Status status) {
+                           firebaseAuth.signOut();
+                       }
+                   });
+                   break;
+               case R.id.nav_share:
+                   Toast.makeText(this, "Sharing coming soon", Toast.LENGTH_SHORT).show();
+                   break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+            return true;
     }
     //end MainActivity
 }
