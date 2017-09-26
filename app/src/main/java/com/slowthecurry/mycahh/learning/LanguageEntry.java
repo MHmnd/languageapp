@@ -12,6 +12,11 @@ public class LanguageEntry {
     public LanguageEntry() {
     }
 
+    public LanguageEntry(String tongan, String english) {
+        this.tongan = tongan;
+        this.english = english;
+    }
+
     String tongan;
     String english;
     String key;

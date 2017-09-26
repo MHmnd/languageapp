@@ -13,5 +13,6 @@ public class Constants {
     public final static String OTHER = "Other";
     public final static String SUB_CATEGORY_TITLE = "subTitle";
     public final static String ORDER_NUMBER = "orderNumber";
+    public final static String COLLECTION = "collection";
 
 }

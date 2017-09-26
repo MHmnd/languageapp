@@ -1,14 +1,19 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
@@ -41,6 +46,7 @@ public class SubCategoryListActivity extends BaseActivity {
         initializeUI();
         String category;
         String header;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
         if (launchingIntent.hasExtra(Constants.SUB_CATEGORY_TITLE)
@@ -57,10 +63,10 @@ public class SubCategoryListActivity extends BaseActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        populateRecyclerView(header, category);
+        populateRecyclerView(header, category, user);
     }
 
-    private void populateRecyclerView(String currentSubCaterogy, String mainCategory) {
+    private void populateRecyclerView(String currentSubCaterogy, String mainCategory, final FirebaseUser user) {
         if (currentSubCaterogy.equals("oops")) {
             return;
         }
@@ -80,8 +86,9 @@ public class SubCategoryListActivity extends BaseActivity {
                         }
                         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                         entriesRecycler.setLayoutManager(layoutManager);
-                        entryAdapter = new EntryAdapter(languageEntries);
+                        entryAdapter = new EntryAdapter(languageEntries, user.getUid());
                         entriesRecycler.setAdapter(entryAdapter);
+
                     }
 
                     @Override

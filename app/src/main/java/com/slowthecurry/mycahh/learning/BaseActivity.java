@@ -115,7 +115,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
                     @Override
                     public void onResult(@NonNull Status status) {
-                        firebaseAuth.signOut();
+                       // firebaseAuth.signOut();
                     }
                 });
                 break;
