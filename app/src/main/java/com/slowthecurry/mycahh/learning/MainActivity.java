@@ -281,6 +281,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
           int id = item.getItemId();
 
            switch (id){
+               case R.id.nav_home:
+                   Intent goHome = new Intent(this, MainActivity.class);
+                   startActivity(goHome);
+                   break;
                case R.id.nav_tutorials:
                    Intent startTutorials = new Intent(this, Tutorials.class);
                    startActivity(startTutorials);

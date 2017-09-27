@@ -50,10 +50,13 @@
             android:name=".SubCategoryListActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Tutorials" />
         <activity
             android:name=".Collections"
             android:label="@string/title_activity_collections"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tutorials"
+            android:label="@string/title_activity_tutorials"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
