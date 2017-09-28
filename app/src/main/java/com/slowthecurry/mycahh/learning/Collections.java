@@ -1,6 +1,8 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,9 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class Collections extends AppCompatActivity
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class Collections extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,7 @@ public class Collections extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.collections_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +77,7 @@ public class Collections extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -78,10 +90,36 @@ public class Collections extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        int id = item.getItemId();
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.collections_drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        switch (id) {
+            case R.id.nav_home:
+                Intent goHome = new Intent(this, MainActivity.class);
+                startActivity(goHome);
+                break;
+            case R.id.nav_tutorials:
+                Intent startTutorials = new Intent(this, Tutorials.class);
+                startActivity(startTutorials);
+                break;
+            case R.id.nav_collections:
+                Intent startCollections = new Intent(this, Collections.class);
+                startActivity(startCollections);
+                break;
+            case R.id.nav_log_out:
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        firebaseAuth.signOut();
+                    }
+                });
+                break;
+            case R.id.nav_share:
+                Toast.makeText(this, "Sharing coming soon", Toast.LENGTH_SHORT).show();
+                break;
+        }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.collections_drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
     }
-}
+
