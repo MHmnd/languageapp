@@ -242,25 +242,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     case Constants.BASICS:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         basicsRecyclerView.setLayoutManager(linearLayoutManager);
-                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
+                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         basicsRecyclerView.setAdapter(basicsAdapter);
                         break;
                     case Constants.PREACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         preachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
+                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         preachingRecyclerView.setAdapter(preachingAdapter);
                         break;
                     case Constants.TEACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         teachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
+                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         teachingRecyclerView.setAdapter(teachingAdapter);
                         break;
                     case Constants.OTHER:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         otherRecyclerView.setLayoutManager(linearLayoutManager);
-                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category);
+                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         otherRecyclerView.setAdapter(otherAdapter);
                         break;
                 }

@@ -38,7 +38,7 @@ public class SubCategoryListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Slide slide = new Slide(5);
-        slide.setDuration(700);
+        slide.setDuration(1000);
         getWindow().setEnterTransition(slide);
         getWindow().setReturnTransition(slide);
         setContentView(R.layout.activity_sub_category_list);

@@ -1,7 +1,9 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
     private ArrayList<String> subCategories;
     private String category;
+    private Activity currentActivity;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final Button subCategoryTitleView;
@@ -36,8 +39,9 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
                     Intent goToSubCategoryList = new Intent(context, SubCategoryListActivity.class);
                     goToSubCategoryList.putExtra(Constants.SUB_CATEGORY_TITLE, subCategoryTitleView.getText().toString());
                     goToSubCategoryList.putExtra(Constants.CATEGORIES, category);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(currentActivity, null);
                     Log.d("CLICKED", subCategoryTitleView.getText().toString());
-                    context.startActivity(goToSubCategoryList);
+                    context.startActivity(goToSubCategoryList, compat.toBundle());
                 }
             });
         }
@@ -48,9 +52,10 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
 
     }
 
-    public SubCategoriesAdapter(ArrayList<String> subCategories, String category) {
+    public SubCategoriesAdapter(ArrayList<String> subCategories, String category, Activity currentActivity) {
         this.subCategories = subCategories;
         this.category = category;
+        this.currentActivity = currentActivity;
     }
 
     @Override
