@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
 
     private ArrayList<LanguageEntry> languageEntries;
+    private ArrayList<String> collectionTitiles;
     private String userID;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,14 +58,17 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
                      */
                     String englishToAdd = englishText.getText().toString();
                     String tonganToAdd = tonganText.getText().toString();
-                    LanguageEntry languageEntry = new LanguageEntry(tonganToAdd, englishToAdd);
+                    final LanguageEntry languageEntry = new LanguageEntry(tonganToAdd, englishToAdd);
 
                     /*
                      * TODO: Check the Firebase Database for any existing
                      * collections and add them to the list
                      */
                     String currentUserId = userID;
-                    final String[] tempArray = {"bob", "hi", "is this thing on"};
+                    String[] titlesArray = new String[collectionTitiles.size()];
+                    titlesArray = collectionTitiles.toArray(titlesArray);
+
+
 
                     /*
                      * Alert Dialog to select Collection to add languageEntry to
@@ -72,10 +76,10 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
                      */
                     AlertDialog.Builder collectionsAlertBuilder = new AlertDialog.Builder(currentView.getContext());
                     collectionsAlertBuilder.setTitle("Add to which collection?");
-                    collectionsAlertBuilder.setItems(tempArray, new DialogInterface.OnClickListener() {
+                    collectionsAlertBuilder.setItems(titlesArray, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, tempArray[which], Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, languageEntry.getTongan(), Toast.LENGTH_SHORT).show();
                         }
                     });
                     collectionsAlertBuilder.setPositiveButton("New Collection", new DialogInterface.OnClickListener() {
@@ -102,8 +106,9 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 
     }
 
-    public EntryAdapter(ArrayList<LanguageEntry> languageEntries, String userID) {
+    public EntryAdapter(ArrayList<LanguageEntry> languageEntries, ArrayList<String> collectionTitiles, String userID) {
         this.languageEntries = languageEntries;
+        this.collectionTitiles = collectionTitiles;
         this.userID = userID;
     }
 
