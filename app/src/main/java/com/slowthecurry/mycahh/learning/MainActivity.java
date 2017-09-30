@@ -95,16 +95,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         };//end fbAuthStateListener instantiation
 
-
-
+        String currentUserFBID = "";
+        try {
+            currentUserFBID = firebaseAuth.getCurrentUser().getUid();
+        }catch (NullPointerException e){
+            Toast.makeText(this, "Please log out and sign in to save to collections.", Toast.LENGTH_LONG).show();
+        }
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
         //build recyclerViews
-        buildSubCategoriesGroup(getString(R.string.category_basics));
-        buildSubCategoriesGroup(getString(R.string.category_preaching));
-        buildSubCategoriesGroup(getString(R.string.category_teaching));
-        buildSubCategoriesGroup(getString(R.string.category_other));
+        buildSubCategoriesGroup(getString(R.string.category_basics), currentUserFBID);
+        buildSubCategoriesGroup(getString(R.string.category_preaching), currentUserFBID);
+        buildSubCategoriesGroup(getString(R.string.category_teaching), currentUserFBID);
+        buildSubCategoriesGroup(getString(R.string.category_other), currentUserFBID);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -227,7 +231,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Pulls a list of the categories and their sub categories and builds an ArrayList to
      * be used to populate the LanguageEntry list.
      */
-    private ArrayList<String> buildSubCategoriesGroup(final String category){
+    private ArrayList<String> buildSubCategoriesGroup(final String category, final String uid){
         final ArrayList<String> catergoriesArraList = new ArrayList<String>();
         Query query = databaseReference.child(category);
         query.addValueEventListener(new ValueEventListener() {
@@ -242,25 +246,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     case Constants.BASICS:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         basicsRecyclerView.setLayoutManager(linearLayoutManager);
-                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
+                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
                         basicsRecyclerView.setAdapter(basicsAdapter);
                         break;
                     case Constants.PREACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         preachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
+                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
                         preachingRecyclerView.setAdapter(preachingAdapter);
                         break;
                     case Constants.TEACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         teachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
+                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
                         teachingRecyclerView.setAdapter(teachingAdapter);
                         break;
                     case Constants.OTHER:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         otherRecyclerView.setLayoutManager(linearLayoutManager);
-                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
+                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
                         otherRecyclerView.setAdapter(otherAdapter);
                         break;
                 }
