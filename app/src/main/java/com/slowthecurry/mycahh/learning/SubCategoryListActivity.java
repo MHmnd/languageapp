@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -72,8 +73,8 @@ public class SubCategoryListActivity extends BaseActivity {
             return;
         }
         if (databaseReference.child(mainCategory).child(currentSubCaterogy).getRef() != null) {
-            Query collectionsQuery = databaseReference.child(Constants.COLLECTION).child(user.getUid());
-            collectionsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            databaseReference.child(Constants.COLLECTION).child(user.getUid())
+                    .addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     final ArrayList<String> collectionsTitles = new ArrayList<String>();
@@ -81,7 +82,9 @@ public class SubCategoryListActivity extends BaseActivity {
                         Collection currentCollection = snapshot.getValue(Collection.class);
                         collectionsTitles.add(currentCollection.getCollectionTitle());
                     }
-                    Query entriesQuery = databaseReference.child(mainCategory).child(currentSubCaterogy).orderByChild(Constants.ORDER_NUMBER);
+                    Query entriesQuery = databaseReference.child(mainCategory)
+                            .child(currentSubCaterogy)
+                            .orderByChild(Constants.ORDER_NUMBER);
                     entriesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -96,7 +99,7 @@ public class SubCategoryListActivity extends BaseActivity {
                             }
                             layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                             entriesRecycler.setLayoutManager(layoutManager);
-                            entryAdapter = new EntryAdapter(languageEntries, collectionsTitles, user.getUid());
+                            entryAdapter = new EntryAdapter(languageEntries, collectionsTitles, user.getUid(), SubCategoryListActivity.this);
                             entriesRecycler.setAdapter(entryAdapter);
 
                         }

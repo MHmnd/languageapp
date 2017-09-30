@@ -1,6 +1,8 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,8 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,6 +40,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
     private ArrayList<LanguageEntry> languageEntries;
     private ArrayList<String> collectionTitiles;
     private String userID;
+    private Activity callingActivity;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView englishText;
@@ -61,12 +71,12 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
                     final LanguageEntry languageEntry = new LanguageEntry(tonganToAdd, englishToAdd);
 
                     /*
-                     * TODO: Check the Firebase Database for any existing
-                     * collections and add them to the list
+                     * converts Arraylist to String Array
+                     * to be past to AlertDialog
                      */
                     String currentUserId = userID;
-                    String[] titlesArray = new String[collectionTitiles.size()];
-                    titlesArray = collectionTitiles.toArray(titlesArray);
+                    String[] titlesArrayfiller = new String[collectionTitiles.size()];
+                    final String[] titlesArray = collectionTitiles.toArray(titlesArrayfiller);
 
 
 
@@ -74,18 +84,66 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
                      * Alert Dialog to select Collection to add languageEntry to
                      * or add a new collection.
                      */
-                    AlertDialog.Builder collectionsAlertBuilder = new AlertDialog.Builder(currentView.getContext());
+                    final AlertDialog.Builder collectionsAlertBuilder =
+                            new AlertDialog.Builder(currentView.getContext());
                     collectionsAlertBuilder.setTitle("Add to which collection?");
                     collectionsAlertBuilder.setItems(titlesArray, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, languageEntry.getTongan(), Toast.LENGTH_SHORT).show();
+                            final String selectedTitle = titlesArray[which];
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            final DatabaseReference reference = database.getReference();
+                            reference.child(Constants.COLLECTION).child(userID)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                                Collection thisCollection = snapshot.getValue(Collection.class);
+                                                if(thisCollection.getCollectionTitle().equals(selectedTitle)){
+                                                    thisCollection.getLanguageEntryArrayList().add(languageEntry);
+                                                    reference.child(Constants.COLLECTION)
+                                                            .child(userID)
+                                                            .child(snapshot.getKey())
+                                                            .setValue(thisCollection);
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
                         }
                     });
+
+                    //Add new Collection
                     collectionsAlertBuilder.setPositiveButton("New Collection", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            final AlertDialog.Builder newCollectionBuilder =
+                                    new AlertDialog.Builder(currentView.getContext());
+                            LayoutInflater inflater = callingActivity.getLayoutInflater();
+                            newCollectionBuilder.setView(inflater.inflate(R.layout.new_collection_dialog, null))
+                                    .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Dialog filler = (Dialog) dialog;
+                                            EditText newTitle = (EditText) filler.findViewById(R.id.new_title);
+                                            ArrayList <LanguageEntry> newEntryList = new ArrayList<>();
+                                            newEntryList.add(languageEntry);
+                                            Collection newCollection =
+                                                    new Collection(newTitle.getText().toString(), newEntryList);
+                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            DatabaseReference reference = database.getReference();
+                                            reference.child(Constants.COLLECTION)
+                                                    .child(userID)
+                                                    .push().setValue(newCollection);
 
+                                        }
+                                    });
+                            AlertDialog newCollectionAlertDialog = newCollectionBuilder.create();
+                            newCollectionAlertDialog.show();
                         }
                     });
 
@@ -106,10 +164,14 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 
     }
 
-    public EntryAdapter(ArrayList<LanguageEntry> languageEntries, ArrayList<String> collectionTitiles, String userID) {
+    public EntryAdapter(ArrayList<LanguageEntry> languageEntries,
+                        ArrayList<String> collectionTitiles,
+                        String userID,
+                        Activity callingActivity) {
         this.languageEntries = languageEntries;
         this.collectionTitiles = collectionTitiles;
         this.userID = userID;
+        this.callingActivity = callingActivity;
     }
 
     @Override

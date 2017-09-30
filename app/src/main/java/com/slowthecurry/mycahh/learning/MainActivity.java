@@ -104,10 +104,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         databaseReference = firebaseDatabase.getReference();
 
         //build recyclerViews
-        buildSubCategoriesGroup(getString(R.string.category_basics), currentUserFBID);
-        buildSubCategoriesGroup(getString(R.string.category_preaching), currentUserFBID);
-        buildSubCategoriesGroup(getString(R.string.category_teaching), currentUserFBID);
-        buildSubCategoriesGroup(getString(R.string.category_other), currentUserFBID);
+        buildSubCategoriesGroup(getString(R.string.category_basics));
+        buildSubCategoriesGroup(getString(R.string.category_preaching));
+        buildSubCategoriesGroup(getString(R.string.category_teaching));
+        buildSubCategoriesGroup(getString(R.string.category_other));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Pulls a list of the categories and their sub categories and builds an ArrayList to
      * be used to populate the LanguageEntry list.
      */
-    private ArrayList<String> buildSubCategoriesGroup(final String category, final String uid){
+    private ArrayList<String> buildSubCategoriesGroup(final String category){
         final ArrayList<String> catergoriesArraList = new ArrayList<String>();
         Query query = databaseReference.child(category);
         query.addValueEventListener(new ValueEventListener() {
@@ -245,25 +245,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     case Constants.BASICS:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         basicsRecyclerView.setLayoutManager(linearLayoutManager);
-                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
+                        basicsAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         basicsRecyclerView.setAdapter(basicsAdapter);
                         break;
                     case Constants.PREACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         preachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
+                        preachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         preachingRecyclerView.setAdapter(preachingAdapter);
                         break;
                     case Constants.TEACHING:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         teachingRecyclerView.setLayoutManager(linearLayoutManager);
-                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
+                        teachingAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         teachingRecyclerView.setAdapter(teachingAdapter);
                         break;
                     case Constants.OTHER:
                         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         otherRecyclerView.setLayoutManager(linearLayoutManager);
-                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this, uid);
+                        otherAdapter = new SubCategoriesAdapter(catergoriesArraList, category, MainActivity.this);
                         otherRecyclerView.setAdapter(otherAdapter);
                         break;
                 }
