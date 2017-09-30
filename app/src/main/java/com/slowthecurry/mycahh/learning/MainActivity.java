@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -286,11 +285,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                    startActivity(goHome);
                    break;
                case R.id.nav_tutorials:
-                   Intent startTutorials = new Intent(this, Tutorials.class);
+                   Intent startTutorials = new Intent(this, TutorialsActivity.class);
                    startActivity(startTutorials);
                    break;
                case R.id.nav_collections:
-                   Intent startCollections = new Intent(this, Collections.class);
+                   Intent startCollections = new Intent(this, CollectionsActivity.class);
                    startActivity(startCollections);
                    break;
                case R.id.nav_log_out:

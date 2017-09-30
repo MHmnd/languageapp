@@ -51,11 +51,11 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Collections"
+            android:name=".CollectionsActivity"
             android:label="@string/title_activity_collections"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tutorials"
+            android:name=".TutorialsActivity"
             android:label="@string/title_activity_tutorials"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

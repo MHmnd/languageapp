@@ -66,36 +66,54 @@ public class SubCategoryListActivity extends BaseActivity {
         populateRecyclerView(header, category, user);
     }
 
-    private void populateRecyclerView(String currentSubCaterogy, String mainCategory, final FirebaseUser user) {
+    private void populateRecyclerView(final String currentSubCaterogy, final String mainCategory, final FirebaseUser user) {
         if (currentSubCaterogy.equals("oops")) {
+            Toast.makeText(this, "Something went wrong, please go back and try again.", Toast.LENGTH_SHORT).show();
             return;
         }
         if (databaseReference.child(mainCategory).child(currentSubCaterogy).getRef() != null) {
-            Query entriesQuery = databaseReference.child(mainCategory).child(currentSubCaterogy).orderByChild(Constants.ORDER_NUMBER);
-                entriesQuery.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        ArrayList<LanguageEntry> languageEntries = new ArrayList<LanguageEntry>();
-                        for (DataSnapshot currentSnapshot : dataSnapshot.getChildren()) {
-                            try {
-                                LanguageEntry disOne = currentSnapshot.getValue(LanguageEntry.class);
-                                languageEntries.add(disOne);
-                            }catch (DatabaseException e){
+            Query collectionsQuery = databaseReference.child(Constants.COLLECTION).child(user.getUid());
+            collectionsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final ArrayList<String> collectionsTitles = new ArrayList<String>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Collection currentCollection = snapshot.getValue(Collection.class);
+                        collectionsTitles.add(currentCollection.getCollectionTitle());
+                    }
+                    Query entriesQuery = databaseReference.child(mainCategory).child(currentSubCaterogy).orderByChild(Constants.ORDER_NUMBER);
+                    entriesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<LanguageEntry> languageEntries = new ArrayList<LanguageEntry>();
+                            for (DataSnapshot currentSnapshot : dataSnapshot.getChildren()) {
+                                try {
+                                    LanguageEntry disOne = currentSnapshot.getValue(LanguageEntry.class);
+                                    languageEntries.add(disOne);
+                                }catch (DatabaseException e){
 
+                                }
                             }
+                            layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                            entriesRecycler.setLayoutManager(layoutManager);
+                            entryAdapter = new EntryAdapter(languageEntries, collectionsTitles, user.getUid());
+                            entriesRecycler.setAdapter(entryAdapter);
+
                         }
-                        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                        entriesRecycler.setLayoutManager(layoutManager);
-                        entryAdapter = new EntryAdapter(languageEntries, user.getUid());
-                        entriesRecycler.setAdapter(entryAdapter);
 
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                }
 
-                    }
-                });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         }
     }
 
