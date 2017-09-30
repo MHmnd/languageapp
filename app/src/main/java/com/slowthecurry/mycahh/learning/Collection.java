@@ -8,14 +8,24 @@ import java.util.ArrayList;
 
 public class Collection {
     String collectionTitle;
+    String key;
     ArrayList <LanguageEntry> languageEntryArrayList;
 
     public Collection() {
     }
 
-    public Collection(String collectionTitle, ArrayList<LanguageEntry> languageEntryArrayList) {
+    public Collection(String collectionTitle, String key, ArrayList<LanguageEntry> languageEntryArrayList) {
         this.collectionTitle = collectionTitle;
+        this.key = key;
         this.languageEntryArrayList = languageEntryArrayList;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getCollectionTitle() {

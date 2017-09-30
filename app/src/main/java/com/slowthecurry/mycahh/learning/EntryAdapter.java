@@ -132,13 +132,19 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
                                             EditText newTitle = (EditText) filler.findViewById(R.id.new_title);
                                             ArrayList <LanguageEntry> newEntryList = new ArrayList<>();
                                             newEntryList.add(languageEntry);
-                                            Collection newCollection =
-                                                    new Collection(newTitle.getText().toString(), newEntryList);
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             DatabaseReference reference = database.getReference();
+                                            String newKey = reference.child(Constants.COLLECTION)
+                                                    .child(userID)
+                                                    .push().getKey();
+                                            Collection newCollection =
+                                                    new Collection(newTitle.getText().toString(),
+                                                            newKey,
+                                                            newEntryList);
                                             reference.child(Constants.COLLECTION)
                                                     .child(userID)
-                                                    .push().setValue(newCollection);
+                                                    .child(newKey)
+                                                    .setValue(newCollection);
 
                                         }
                                     });
