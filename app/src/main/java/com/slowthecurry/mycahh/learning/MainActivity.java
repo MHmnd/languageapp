@@ -94,12 +94,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         };//end fbAuthStateListener instantiation
 
-        String currentUserFBID = "";
-        try {
-            currentUserFBID = firebaseAuth.getCurrentUser().getUid();
-        }catch (NullPointerException e){
-            Toast.makeText(this, "Please log out and sign in to save to collections.", Toast.LENGTH_LONG).show();
-        }
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
@@ -167,33 +161,35 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         adminQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+               try{
                 String currentUID = user.getUid();
                 Boolean isUserAdmin = false;
 
-                for(DataSnapshot adminUsers : dataSnapshot.getChildren()){
+                for(DataSnapshot adminUsers : dataSnapshot.getChildren()) {
                     if (currentUID.equals(adminUsers.getValue(String.class))) {
                         isUserAdmin = true;
                     }
-                    try {
-                        if (isUserAdmin) {
-                            addStuffButton.setVisibility(View.VISIBLE);
 
-                            addStuffButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent addEntry = new Intent(getApplicationContext(), AddEntry.class);
-                                    startActivity(addEntry);
-                                }
-                            });
-                        }else {
-                            addStuffButton.setVisibility(View.GONE);
-                        }
+                    if (isUserAdmin) {
+                        addStuffButton.setVisibility(View.VISIBLE);
+
+                        addStuffButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent addEntry = new Intent(getApplicationContext(), AddEntry.class);
+                                startActivity(addEntry);
+                            }
+                        });
+                    } else {
+                        addStuffButton.setVisibility(View.GONE);
+                    }
+                }
                     }catch (NullPointerException e){
                         Log.d(DEBUG_TAG, "UID NULL");
                     }
 
                 }
-            }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -208,6 +204,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         firebaseAuth.addAuthStateListener(fbAuthStateListener);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
     }//end onStart()
 
@@ -222,6 +219,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onStop() {
         super.onStop();
+        firebaseAuth.signOut();
         firebaseAuth.removeAuthStateListener(fbAuthStateListener);
     }//end onStop()
 
