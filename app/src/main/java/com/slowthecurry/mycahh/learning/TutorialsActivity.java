@@ -1,6 +1,8 @@
 package com.slowthecurry.mycahh.learning;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,16 +14,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class TutorialsActivity extends AppCompatActivity
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class TutorialsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorials);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +89,30 @@ public class TutorialsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        switch (id) {
+            case R.id.nav_home:
+                Intent goHome = new Intent(this, MainActivity.class);
+                startActivity(goHome);
+                break;
+            case R.id.nav_tutorials:
 
+                break;
+            case R.id.nav_collections:
+                Intent startCollections = new Intent(this, CollectionsActivity.class);
+                startActivity(startCollections);
+                break;
+            case R.id.nav_log_out:
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        firebaseAuth.signOut();
+                    }
+                });
+                break;
+            case R.id.nav_share:
+                Toast.makeText(this, "Sharing coming soon", Toast.LENGTH_SHORT).show();
+                break;
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

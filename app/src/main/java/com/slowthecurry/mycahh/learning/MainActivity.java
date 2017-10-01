@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
                     Intent loginActivityIntent = new Intent(context, LoginActivity.class);
                     startActivity(loginActivityIntent);
+                    finish();
                 }
             }//end @Override onAuthStateChanged()
 
@@ -219,7 +220,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onStop() {
         super.onStop();
-        firebaseAuth.signOut();
         firebaseAuth.removeAuthStateListener(fbAuthStateListener);
     }//end onStop()
 
@@ -283,8 +283,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
            switch (id){
                case R.id.nav_home:
-                   Intent goHome = new Intent(this, MainActivity.class);
-                   startActivity(goHome);
+                   
                    break;
                case R.id.nav_tutorials:
                    Intent startTutorials = new Intent(this, TutorialsActivity.class);

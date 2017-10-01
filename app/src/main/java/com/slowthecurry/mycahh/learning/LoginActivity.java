@@ -233,7 +233,9 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    finish();
+                    Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainActivityIntent);
                 } else {
                     Toast.makeText(context, "Google Authentication failed", Toast.LENGTH_LONG).show();
                 }

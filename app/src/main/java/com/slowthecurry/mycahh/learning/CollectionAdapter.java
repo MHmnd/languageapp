@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -23,12 +23,12 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     private Activity callingActivity;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView titleTextView;
+        private final Button titleButton;
 
         public ViewHolder(final View currentView) {
             super(currentView);
             final Context context = currentView.getContext();
-            titleTextView = (TextView) currentView.findViewById(R.id.collections_title_textview);
+            titleButton = (Button) currentView.findViewById(R.id.collections_title_button);
             currentView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -37,8 +37,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             });
         }
 
-        public TextView getTitleTextView() {
-            return titleTextView;
+        public Button getTitleButton() {
+            return titleButton;
         }
     }
 
@@ -61,7 +61,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Collection collection = collectionArrayList.get(position);
 
-        holder.getTitleTextView().setText(collection.getCollectionTitle());
+        holder.getTitleButton().setText(collection.getCollectionTitle());
 
     }
 

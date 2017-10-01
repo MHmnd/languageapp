@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.slowthecurry.mycahh.learning.CollectionsActivity"
-    tools:showIn="@layout/app_bar_collections">
+    tools:showIn="@layout/app_bar_collections"
+    android:background="@android:color/background_light">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/collections_title_recycler"

@@ -141,8 +141,7 @@ public class CollectionsActivity extends BaseActivity
                 startActivity(startTutorials);
                 break;
             case R.id.nav_collections:
-                Intent startCollections = new Intent(this, CollectionsActivity.class);
-                startActivity(startCollections);
+
                 break;
             case R.id.nav_log_out:
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
