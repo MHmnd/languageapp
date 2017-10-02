@@ -114,5 +114,6 @@
     <string name="title_activity_tutorials">Tutorials</string>
     <string name="new_collection">Enter new collection title.</string>
     <string name="title">Title</string>
+    <string name="title_activity_collection_list">CollectionListActivity</string>
 
 </resources>

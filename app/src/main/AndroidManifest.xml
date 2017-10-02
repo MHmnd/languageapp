@@ -35,8 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddEntry"
             android:label="@string/title_activity_add_entry"
@@ -58,7 +57,16 @@
         <activity
             android:name=".TutorialsActivity"
             android:label="@string/title_activity_tutorials"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CollectionListActivity"
+            android:label="@string/title_activity_collection_list"
+            android:parentActivityName=".CollectionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.slowthecurry.mycahh.learning.CollectionsActivity" />
+        </activity>
     </application>
 
 </manifest>
