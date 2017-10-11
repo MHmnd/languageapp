@@ -2,6 +2,7 @@ package com.slowthecurry.mycahh.learning;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +30,6 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             super(currentView);
             final Context context = currentView.getContext();
             titleButton = (Button) currentView.findViewById(R.id.collections_title_button);
-            currentView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
 
         public Button getTitleButton() {
@@ -42,8 +37,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         }
     }
 
-    public CollectionAdapter(ArrayList<Collection> languageEntries, String userID, Activity callingActivity) {
-        this.collectionArrayList = languageEntries;
+    public CollectionAdapter(ArrayList<Collection> collectionArrayList, String userID, Activity callingActivity) {
+        this.collectionArrayList = collectionArrayList;
         this.userID = userID;
         this.callingActivity = callingActivity;
     }
@@ -59,10 +54,21 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Collection collection = collectionArrayList.get(position);
+        final Collection collection = collectionArrayList.get(position);
 
         holder.getTitleButton().setText(collection.getCollectionTitle());
+        holder.getTitleButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToCollectionList = new Intent(callingActivity.getApplicationContext()
+                        , CollectionListActivity.class);
+                goToCollectionList.putExtra(Constants.USERS, userID);
+                goToCollectionList.putExtra(Constants.COLLECTION, collection.getKey());
+                goToCollectionList.putExtra("Title", collection.getCollectionTitle());
 
+                callingActivity.startActivity(goToCollectionList);
+            }
+        });
     }
 
 
