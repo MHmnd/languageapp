@@ -3,11 +3,10 @@ package com.slowthecurry.mycahh.learning;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.transition.Slide;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,12 +25,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CollectionsActivity extends BaseActivity
+public class CollectionTitlesActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth firebaseAuth;
@@ -40,11 +38,15 @@ public class CollectionsActivity extends BaseActivity
 
     RecyclerView.LayoutManager layoutManager;
     RecyclerView titlesRecycler;
-    CollectionAdapter collectionAdapter;
+    CollectionTitlesAdapter collectionTitlesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Slide slide = new Slide(80);
+        slide.setDuration(750);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReturnTransition(slide);
         setContentView(R.layout.activity_collections);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,8 +71,8 @@ public class CollectionsActivity extends BaseActivity
                     }
                     layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                     titlesRecycler.setLayoutManager(layoutManager);
-                    collectionAdapter = new CollectionAdapter(collectionArrayList, userID, CollectionsActivity.this);
-                    titlesRecycler.setAdapter(collectionAdapter);
+                    collectionTitlesAdapter = new CollectionTitlesAdapter(collectionArrayList, userID, CollectionTitlesActivity.this);
+                    titlesRecycler.setAdapter(collectionTitlesAdapter);
 
                 }
 
@@ -130,6 +132,8 @@ public class CollectionsActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        ActivityOptionsCompat activityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, null);
 
         switch (id) {
             case R.id.nav_home:
@@ -138,7 +142,7 @@ public class CollectionsActivity extends BaseActivity
                 break;
             case R.id.nav_tutorials:
                 Intent startTutorials = new Intent(this, TutorialsActivity.class);
-                startActivity(startTutorials);
+                startActivity(startTutorials, activityOptionsCompat.toBundle());
                 break;
             case R.id.nav_collections:
 

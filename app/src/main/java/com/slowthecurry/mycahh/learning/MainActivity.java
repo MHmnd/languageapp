@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -280,6 +281,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
           int id = item.getItemId();
+        ActivityOptionsCompat activityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, null);
 
            switch (id){
                case R.id.nav_home:
@@ -287,11 +290,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                    break;
                case R.id.nav_tutorials:
                    Intent startTutorials = new Intent(this, TutorialsActivity.class);
-                   startActivity(startTutorials);
+                   startActivity(startTutorials, activityOptionsCompat.toBundle());
                    break;
                case R.id.nav_collections:
-                   Intent startCollections = new Intent(this, CollectionsActivity.class);
-                   startActivity(startCollections);
+                   Intent startCollections = new Intent(this, CollectionTitlesActivity.class);
+                   startActivity(startCollections, activityOptionsCompat.toBundle());
                    break;
                case R.id.nav_log_out:
                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {

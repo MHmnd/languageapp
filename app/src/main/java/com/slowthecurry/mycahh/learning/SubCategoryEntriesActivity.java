@@ -1,15 +1,10 @@
 package com.slowthecurry.mycahh.learning;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,14 +20,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SubCategoryListActivity extends BaseActivity {
+public class SubCategoryEntriesActivity extends BaseActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
 
     TextView headerText;
     RecyclerView entriesRecycler;
     LinearLayoutManager layoutManager;
-    EntryAdapter entryAdapter;
+    EntriesAdapter entriesAdapter;
 
 
     @Override
@@ -99,8 +94,8 @@ public class SubCategoryListActivity extends BaseActivity {
                             }
                             layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                             entriesRecycler.setLayoutManager(layoutManager);
-                            entryAdapter = new EntryAdapter(languageEntries, collectionsTitles, user.getUid(), SubCategoryListActivity.this);
-                            entriesRecycler.setAdapter(entryAdapter);
+                            entriesAdapter = new EntriesAdapter(languageEntries, collectionsTitles, user.getUid(), SubCategoryEntriesActivity.this);
+                            entriesRecycler.setAdapter(entriesAdapter);
 
                         }
 

@@ -3,6 +3,7 @@ package com.slowthecurry.mycahh.learning;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * database so entries can be added and adjusted as need be
  */
 
-public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> {
+public class CollectionTitlesAdapter extends RecyclerView.Adapter<CollectionTitlesAdapter.ViewHolder> {
 
     private ArrayList<Collection> collectionArrayList;
     private String userID;
@@ -37,14 +38,14 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         }
     }
 
-    public CollectionAdapter(ArrayList<Collection> collectionArrayList, String userID, Activity callingActivity) {
+    public CollectionTitlesAdapter(ArrayList<Collection> collectionArrayList, String userID, Activity callingActivity) {
         this.collectionArrayList = collectionArrayList;
         this.userID = userID;
         this.callingActivity = callingActivity;
     }
 
     @Override
-    public CollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CollectionTitlesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.collections_title, parent, false);
 
@@ -65,8 +66,9 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
                 goToCollectionList.putExtra(Constants.USERS, userID);
                 goToCollectionList.putExtra(Constants.COLLECTION, collection.getKey());
                 goToCollectionList.putExtra("Title", collection.getCollectionTitle());
-
-                callingActivity.startActivity(goToCollectionList);
+                ActivityOptionsCompat activityOptionsCompat =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(callingActivity, null);
+                callingActivity.startActivity(goToCollectionList, activityOptionsCompat.toBundle());
             }
         });
     }

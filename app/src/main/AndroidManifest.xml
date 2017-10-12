@@ -23,12 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Greetings"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Language"
-            android:screenOrientation="portrait" />
         <activity android:name=".BaseActivity" />
         <activity
             android:name=".CreateAccountActivity"
@@ -47,25 +41,27 @@
                 android:value="com.slowthecurry.mycahh.learning.MainActivity" />
         </activity>
         <activity
-            android:name=".SubCategoryListActivity"
+            android:name=".SubCategoryEntriesActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CollectionsActivity"
+            android:name=".CollectionTitlesActivity"
             android:label="@string/title_activity_collections"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TutorialsActivity"
             android:label="@string/title_activity_tutorials"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CollectionListActivity"
-            android:label="@string/title_activity_collection_list"
-            android:parentActivityName=".CollectionsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name"
+            android:parentActivityName=".CollectionTitlesActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.slowthecurry.mycahh.learning.CollectionsActivity" />
+                android:value="com.slowthecurry.mycahh.learning.CollectionTitlesActivity" />
         </activity>
     </application>
 

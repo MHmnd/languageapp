@@ -98,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 startActivity(startTutorials);
                 break;
             case R.id.nav_collections:
-                Intent startCollections = new Intent(this, CollectionsActivity.class);
+                Intent startCollections = new Intent(this, CollectionTitlesActivity.class);
                 startActivity(startCollections);
                 break;
             case R.id.nav_log_out:

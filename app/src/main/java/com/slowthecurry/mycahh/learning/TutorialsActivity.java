@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.transition.Slide;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,10 @@ public class TutorialsActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Slide slide = new Slide(80);
+        slide.setDuration(750);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReturnTransition(slide);
         setContentView(R.layout.activity_tutorials);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,18 +93,19 @@ public class TutorialsActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        ActivityOptionsCompat activityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this, null);
 
-        switch (id) {
+        switch (id){
             case R.id.nav_home:
-                Intent goHome = new Intent(this, MainActivity.class);
-                startActivity(goHome);
+
                 break;
             case R.id.nav_tutorials:
 
                 break;
             case R.id.nav_collections:
-                Intent startCollections = new Intent(this, CollectionsActivity.class);
-                startActivity(startCollections);
+                Intent startCollections = new Intent(this, CollectionTitlesActivity.class);
+                startActivity(startCollections, activityOptionsCompat.toBundle());
                 break;
             case R.id.nav_log_out:
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {

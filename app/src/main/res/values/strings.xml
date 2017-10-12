@@ -41,7 +41,6 @@
     <string-array name="basics_array">
         <item>Tense Markers</item>
         <item>Sentence Structure</item>
-        <item>Greetings and Introductions</item>
         <item>Goodbyes</item>
         <item>Vocabulary</item>
         <item>Numbers</item>
@@ -50,7 +49,7 @@
     </string-array>
 
     <string-array name="preaching_array">
-        <item>Greatings and Introductions</item>
+        <item>Greetings and Introductions</item>
         <item>Language</item>
         <item>After the Greeting</item>
         <item>Presenting a Topic</item>

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class SubCategoriesAdapter extends RecyclerView.Adapter<SubCategoriesAdap
             subCategoryTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent goToSubCategoryList = new Intent(context, SubCategoryListActivity.class);
+                    Intent goToSubCategoryList = new Intent(context, SubCategoryEntriesActivity.class);
                     goToSubCategoryList.putExtra(Constants.SUB_CATEGORY_TITLE, subCategoryTitleView.getText().toString());
                     goToSubCategoryList.putExtra(Constants.CATEGORIES, category);
                     ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(currentActivity, null);

@@ -5,18 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Looper;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +27,7 @@ import java.util.ArrayList;
  * handles onLongClicks to add to a user's collection.
  */
 
-public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
+public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHolder> {
 
     private ArrayList<LanguageEntry> languageEntries;
     private ArrayList<String> collectionTitiles;
@@ -172,10 +164,10 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 
     }
 
-    public EntryAdapter(ArrayList<LanguageEntry> languageEntries,
-                        ArrayList<String> collectionTitiles,
-                        String userID,
-                        Activity callingActivity) {
+    public EntriesAdapter(ArrayList<LanguageEntry> languageEntries,
+                          ArrayList<String> collectionTitiles,
+                          String userID,
+                          Activity callingActivity) {
         this.languageEntries = languageEntries;
         this.collectionTitiles = collectionTitiles;
         this.userID = userID;
@@ -183,7 +175,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
     }
 
     @Override
-    public EntryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EntriesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.entry_item, parent, false);
 

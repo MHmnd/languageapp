@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.slowthecurry.mycahh.learning.CollectionListActivity"
-    tools:showIn="@layout/activity_collection_list">
+    android:background="@color/cardview_light_background"
+    android:elevation="@dimen/cardview_default_elevation"
+    tools:context="com.slowthecurry.mycahh.learning.CollectionListActivity">
+
     <TextView
         android:id="@+id/collection_list_header"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:gravity="center_vertical"
         android:minHeight="48dp"
         android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 

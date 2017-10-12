@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/cardview_light_background"
     android:elevation="@dimen/cardview_default_elevation"
-    tools:context="com.slowthecurry.mycahh.learning.SubCategoryListActivity">
+    tools:context="com.slowthecurry.mycahh.learning.SubCategoryEntriesActivity">
 
     <TextView
         android:id="@+id/sub_category_list_header"
@@ -16,6 +16,7 @@
         android:gravity="center_vertical"
         android:minHeight="48dp"
         android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
