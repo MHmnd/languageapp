@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,7 @@ public class CollectionTitlesAdapter extends RecyclerView.Adapter<CollectionTitl
     private ArrayList<Collection> collectionArrayList;
     private String userID;
     private Activity callingActivity;
+    private String[] tutorialsTites;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final Button titleButton;
@@ -44,6 +46,11 @@ public class CollectionTitlesAdapter extends RecyclerView.Adapter<CollectionTitl
         this.callingActivity = callingActivity;
     }
 
+    public CollectionTitlesAdapter(Activity callingActivity, String[] tutorialsTites) {
+        this.callingActivity = callingActivity;
+        this.tutorialsTites = tutorialsTites;
+    }
+
     @Override
     public CollectionTitlesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -54,23 +61,41 @@ public class CollectionTitlesAdapter extends RecyclerView.Adapter<CollectionTitl
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Collection collection = collectionArrayList.get(position);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        final ActivityOptionsCompat activityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(callingActivity, null);
+        if(collectionArrayList != null) {
+            final Collection collection = collectionArrayList.get(position);
 
-        holder.getTitleButton().setText(collection.getCollectionTitle());
-        holder.getTitleButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToCollectionList = new Intent(callingActivity.getApplicationContext()
-                        , CollectionListActivity.class);
-                goToCollectionList.putExtra(Constants.USERS, userID);
-                goToCollectionList.putExtra(Constants.COLLECTION, collection.getKey());
-                goToCollectionList.putExtra("Title", collection.getCollectionTitle());
-                ActivityOptionsCompat activityOptionsCompat =
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(callingActivity, null);
-                callingActivity.startActivity(goToCollectionList, activityOptionsCompat.toBundle());
-            }
-        });
+            holder.getTitleButton().setText(collection.getCollectionTitle());
+            holder.getTitleButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goToCollectionList = new Intent(callingActivity.getApplicationContext()
+                            , CollectionListActivity.class);
+                    goToCollectionList.putExtra(Constants.USERS, userID);
+                    goToCollectionList.putExtra(Constants.COLLECTION, collection.getKey());
+                    goToCollectionList.putExtra("Title", collection.getCollectionTitle());
+                    callingActivity.startActivity(goToCollectionList, activityOptionsCompat.toBundle());
+                }
+            });
+        }
+
+        if(tutorialsTites != null){
+            final String titleString = tutorialsTites[position];
+            holder.getTitleButton().setText(titleString);
+
+            holder.getTitleButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goToLesson = new Intent(callingActivity.getApplicationContext(),
+                            TutorialLesson.class);
+                    goToLesson.putExtra(Constants.TUTORIAL_TITLE, titleString);
+                    callingActivity.startActivity(goToLesson, activityOptionsCompat.toBundle());
+                }
+            });
+
+        }
     }
 
 
@@ -78,6 +103,14 @@ public class CollectionTitlesAdapter extends RecyclerView.Adapter<CollectionTitl
 
     @Override
     public int getItemCount() {
-        return collectionArrayList.size();
+        if(collectionArrayList != null) {
+            return collectionArrayList.size();
+        }
+        if(tutorialsTites != null){
+            return tutorialsTites.length;
+        }else {
+            return 0;
+        }
+
     }
 }

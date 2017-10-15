@@ -1,11 +1,14 @@
 package com.slowthecurry.mycahh.learning;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,6 +18,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -25,6 +30,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class TutorialsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseAuth firebaseAuth;
+    RecyclerView tutorialTitlesRecycler;
+    String[] titles;
+    CollectionTitlesAdapter collectionTitlesAdapter;
+    LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +46,13 @@ public class TutorialsActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        tutorialTitlesRecycler = (RecyclerView) findViewById(R.id.tutorials_titles_recycler);
+        Resources res =getResources();
+        titles = res.getStringArray(R.array.tutorial_titles);
+        collectionTitlesAdapter = new CollectionTitlesAdapter(TutorialsActivity.this, titles);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        tutorialTitlesRecycler.setLayoutManager(linearLayoutManager);
+        tutorialTitlesRecycler.setAdapter(collectionTitlesAdapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

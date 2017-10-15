@@ -115,4 +115,42 @@
     <string name="title">Title</string>
     <string name="title_activity_collection_list">CollectionListActivity</string>
 
+
+
+    <!--Tutorials Titles-->
+    <string-array name="tutorial_titles">
+        <item>Getting Started</item>
+        <item>Grammar</item>
+    </string-array>
+    <!--Getting Started Content-->
+    <string name="getting_started_paragraph_1">
+        Pronunciation and spelling in phonemic. They are spelled how they are pronounced and vice
+        versa. There are no silent letters or complex rules for pronunciation. Bellow you will find
+        the Tongan alphabet and they're pronunciations.
+    </string>
+    <string name="tongan_a">
+        a as in "father"
+    </string>
+    <string name="tongan_e">
+        e as in "bet"
+    </string>
+    <string name="tongan_i">
+        i as in "machine"
+    </string>
+    <string name="tongan_o">
+        o as in "corn"
+    </string>
+    <string name="tongan_u">
+        u as in root
+    </string>
+    <string name="getting_started_paragraph_2">
+        Rules to remember:
+    </string>
+    <string name="rules_bullet_1">
+        All consonants are separated by a vowel.
+    </string>
+    <string name="rules_bullet_2">
+        All words end in a vowel.
+    </string>
+
 </resources>

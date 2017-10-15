@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.slowthecurry.mycahh.learning.TutorialsActivity"
-    tools:showIn="@layout/app_bar_tutorials">
+    tools:context="com.slowthecurry.mycahh.learning.TutorialLesson">
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
+        android:id="@+id/getting_started_pp1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tutorials_titles_recycler"/>
-
+        android:text="TextView" />
 </LinearLayout>
