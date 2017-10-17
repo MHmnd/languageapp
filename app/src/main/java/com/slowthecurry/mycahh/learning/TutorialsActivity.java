@@ -2,6 +2,7 @@ package com.slowthecurry.mycahh.learning;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,12 +21,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 public class TutorialsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,6 +66,28 @@ public class TutorialsActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.tutorials_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navigationHeader = navigationView.getHeaderView(0);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        TextView navigationName = (TextView) navigationHeader.findViewById(R.id.nav_name);
+        TextView navigationEmail = (TextView) navigationHeader.findViewById(R.id.nav_email);
+
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+                navigationName.setText(name);
+                navigationEmail.setText(email);
+            }
+            ;
+        }
     }
 
     @Override
@@ -72,6 +98,12 @@ public class TutorialsActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        collectionTitlesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -106,7 +138,8 @@ public class TutorialsActivity extends BaseActivity
 
         switch (id){
             case R.id.nav_home:
-
+                Intent goHome = new Intent(this, MainActivity.class);
+                startActivity(goHome);
                 break;
             case R.id.nav_tutorials:
 

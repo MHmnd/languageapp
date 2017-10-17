@@ -54,7 +54,8 @@
             android:name=".TutorialsActivity"
             android:label="@string/title_activity_tutorials"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".CollectionListActivity"
             android:label="@string/app_name"
@@ -64,7 +65,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.slowthecurry.mycahh.learning.CollectionTitlesActivity" />
         </activity>
-        <activity android:name=".TutorialLesson"></activity>
+        <activity android:name=".TutorialLesson"
+            android:parentActivityName=".TutorialsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.slowthecurry.mycahh.learning.TutorialsActivity" />
+
+        </activity>
     </application>
 
 </manifest>
