@@ -126,13 +126,14 @@
     <string name="getting_started_paragraph_1">
         Pronunciation and spelling in phonemic. They are spelled how they are pronounced and vice
         versa. There are no silent letters or complex rules for pronunciation. Bellow you will find
-        the Tongan alphabet and they're pronunciations.
+        the Tongan alphabet and their pronunciations.
     </string>
+    <string name="vowels">Vowels</string>
     <string name="tongan_a">
         a as in "father"
     </string>
     <string name="tongan_e">
-        e as in "bet"
+        e as in "met"
     </string>
     <string name="tongan_i">
         i as in "machine"
@@ -141,7 +142,7 @@
         o as in "corn"
     </string>
     <string name="tongan_u">
-        u as in root
+        u as in boot
     </string>
     <string name="getting_started_paragraph_2">
         Rules to remember:

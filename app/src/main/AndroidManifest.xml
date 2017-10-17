@@ -48,7 +48,8 @@
             android:name=".CollectionTitlesActivity"
             android:label="@string/title_activity_collections"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".TutorialsActivity"
             android:label="@string/title_activity_tutorials"
