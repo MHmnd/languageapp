@@ -8,8 +8,18 @@
     tools:context="com.slowthecurry.mycahh.learning.TutorialLesson">
 
     <TextView
+        android:id="@+id/getting_started_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ListHeader"
+        android:text="@string/getting_started"/>
+    <View
+        style="@style/Divider"/>
+
+    <TextView
         android:id="@+id/getting_started_pp1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        style="@style/Paragraphs"
+        android:text="@string/getting_started_paragraph_1"/>
 </LinearLayout>

@@ -21,10 +21,28 @@
     </style>
 
     <style name="ListHeader">
-        <item name="android:paddingStart">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
         <item name="android:textColor">@color/primary_text</item>
+    </style>
+    <style name="Paragraphs">
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divider</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

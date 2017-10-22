@@ -124,9 +124,9 @@
     </string-array>
     <!--Getting Started Content-->
     <string name="getting_started_paragraph_1">
-        Pronunciation and spelling in phonemic. They are spelled how they are pronounced and vice
+        Pronunciation and spelling are phonemic. That is, they are spelled how they are pronounced and vice
         versa. There are no silent letters or complex rules for pronunciation. Bellow you will find
-        the Tongan alphabet and their pronunciations.
+        the Tongan alphabet, their pronunciations, and some general rules of thumb.
     </string>
     <string name="vowels">Vowels</string>
     <string name="tongan_a">
@@ -153,5 +153,6 @@
     <string name="rules_bullet_2">
         All words end in a vowel.
     </string>
+    <string name="getting_started">Getting Started</string>
 
 </resources>
