@@ -116,7 +116,6 @@
     <string name="title_activity_collection_list">CollectionListActivity</string>
 
 
-
     <!--Tutorials Titles-->
     <string-array name="tutorial_titles">
         <item>Getting Started</item>
@@ -129,30 +128,78 @@
         the Tongan alphabet, their pronunciations, and some general rules of thumb.
     </string>
     <string name="vowels">Vowels</string>
-    <string name="tongan_a">
-        a as in "father"
+    <string name="tongan_vowels">
+    <b>a</b> as in father \n\n
+    <b>e</b> as in met \n\n
+    <b>i</b> as in machine \n\n
+    <b>o</b> as in corn \n\n
+    <b>u</b> as in boot
     </string>
-    <string name="tongan_e">
-        e as in "met"
+
+    <string name="consonants">
+        Consonants
     </string>
-    <string name="tongan_i">
-        i as in "machine"
+
+    <string name="tongan_consonants">
+        <b>f</b> as in father \n\n
+        <b>h</b> as in hand \n\n
+        <b>k</b> as in kabob \n\n
+        <b>l</b> as in large \n\n
+        <b>m</b> as in mars \n\n
+        <b>n</b> as in nachos \n\n
+        <b>ng</b> as in singer \n\n
+        <b>p</b> as in pad \n\n
+        <b>s</b> as in sat \n\n
+        <b>t</b> as in time \n\n
+        <b>v</b> as in very \n\n
+        <b>\'</b> glottal stop
     </string>
-    <string name="tongan_o">
-        o as in "corn"
-    </string>
-    <string name="tongan_u">
-        u as in boot
-    </string>
+
     <string name="getting_started_paragraph_2">
-        Rules to remember:
+        Here are a few things to remember. All consonants are separated by a vowel, and all words end in a vowel. This is especially good to
+        remember for words that have been \"Tonganized\". For instance, <i>website</i> is translated to <i>uepisaiti</i>. However it is acceptable
+        to leave out the <i>i</i> separating the <i>p</i> and <i>s</i> when saying the word out loud. \n\n
+
+        It is important to sound out each vowel individually when they are grouped together. Notice the differences below.
     </string>
-    <string name="rules_bullet_1">
-        All consonants are separated by a vowel.
+
+    <string name="vowel_contrasts_1">
+        <b>i</b> and <b>e</b> contrasts: \n\n
+        feitu\'u = place \n
+        fetu\'u = star \n\n
+
+        vai = water \n
+        vae = divide \n\n
+
+        toi = hide \n
+        toe = again
     </string>
-    <string name="rules_bullet_2">
-        All words end in a vowel.
+
+    <string name="vowel_contrasts_2">
+        <b>u</b> and <b>o</b> contrasts: \n\n
+        lao = law \n
+        lau = read \n\n
+
+        tao = spear \n
+        tau = we \n\n
+
+        vao = forrest \n
+        vau = to shred
     </string>
+
+    <string name="getting_started_paragraph_3">
+        All vowels have a short and long form. The long form has a toloi (macron) over the vowel.
+        The length of the vowel can change the entire meaning of the word.
+    </string>
+
+    <string name="length_contrasts_1">
+        langa = to build \nlangā = to be in labor with child \n\npato = duck \npatō = a thump \n\npulu = cow \npulū = blue
+    </string>
+
+    <string name="length_contrasts_2">
+        pepe = butterfly \npēpē = baby \n\nkaka = to climb \nkakā = parrot \nkākā = deceit
+    </string>
+
     <string name="getting_started">Getting Started</string>
 
 </resources>
